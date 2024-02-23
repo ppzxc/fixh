@@ -9,11 +9,19 @@ public final class FloatUtils {
     return FixhConstants.SECURE_RANDOM.nextFloat();
   }
 
-  public static float getNegative() {
-    return FixhConstants.SECURE_RANDOM.nextFloat(Float.MIN_VALUE, -1);
+  public static float giveMeNegative() {
+    float nextFloat = giveMeOne();
+    if (nextFloat > 0) {
+      return nextFloat * -1;
+    }
+    return nextFloat;
   }
 
-  public static float getPositive() {
-    return FixhConstants.SECURE_RANDOM.nextFloat(1, Float.MAX_VALUE);
+  public static float giveMePositive() {
+    float nextFloat = giveMeOne();
+    if (nextFloat < 0) {
+      return nextFloat * -1;
+    }
+    return nextFloat;
   }
 }
