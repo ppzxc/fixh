@@ -2,9 +2,9 @@ package com.github.ppzxc.fixh;
 
 import java.nio.charset.StandardCharsets;
 
-public final class RandomBytes {
+public final class ByteArrayUtils {
 
-  private RandomBytes() {
+  private ByteArrayUtils() {
   }
 
   public static byte[] giveMeOne(int length) {

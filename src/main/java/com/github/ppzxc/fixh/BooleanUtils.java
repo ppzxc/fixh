@@ -1,11 +1,11 @@
-package com.nanoit.gateway.common;
+package com.github.ppzxc.fixh;
 
-public final class RandomBoolean {
+public final class BooleanUtils {
 
-  private RandomBoolean() {
+  private BooleanUtils() {
   }
 
   public static boolean giveMeOne() {
-    return RandomConstants.getSecureRandom().nextBoolean();
+    return FixhConstants.SECURE_RANDOM.nextBoolean();
   }
 }

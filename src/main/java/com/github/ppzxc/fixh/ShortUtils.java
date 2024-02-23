@@ -2,9 +2,9 @@ package com.github.ppzxc.fixh;
 
 import java.util.List;
 
-public final class RandomShort {
+public final class ShortUtils {
 
-  private RandomShort() {
+  private ShortUtils() {
   }
 
   public static short getNegative() {
@@ -16,11 +16,11 @@ public final class RandomShort {
   }
 
   public static int getUnsignedBoundary() {
-    return FixhConstants.SECURE_RANDOM.nextInt(0, UnsignedMaxValues.SHORT);
+    return FixhConstants.SECURE_RANDOM.nextInt(0, FixhConstants.UNSIGNED_MAX_VALUE_SHORT);
   }
 
   public static int getGreaterThanUnsignedIntegerMaxValue() {
-    return FixhConstants.SECURE_RANDOM.nextInt(FixhConstants.SHORT + 1, Short.MAX_VALUE);
+    return FixhConstants.SECURE_RANDOM.nextInt(FixhConstants.UNSIGNED_MAX_VALUE_SHORT + 1, Short.MAX_VALUE);
   }
 
   public static short giveMeOne() {

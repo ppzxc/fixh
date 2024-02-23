@@ -1,8 +1,8 @@
 package com.github.ppzxc.fixh;
 
-public final class RandomFloat {
+public final class FloatUtils {
 
-  private RandomFloat() {
+  private FloatUtils() {
   }
 
   public static float giveMeOne() {

@@ -2,29 +2,25 @@ package com.github.ppzxc.fixh;
 
 import java.util.List;
 
-public final class RandomNibble {
+public final class NibbleUtils {
 
-  public final static int MAX_VALUE = 15;
-  public final static int MIN_VALUE = -16;
-  public final static int UNSIGNED_MAX_VALUE = 31;
-
-  private RandomNibble() {
+  private NibbleUtils() {
   }
 
   public static byte getNegative() {
-    return (byte) FixhConstants.SECURE_RANDOM.nextInt(MIN_VALUE, -1);
+    return (byte) FixhConstants.SECURE_RANDOM.nextInt(FixhConstants.SIGNED_NIBBLE_MIN_VALUE, -1);
   }
 
   public static byte getPositive() {
-    return (byte) Math.abs(FixhConstants.SECURE_RANDOM.nextInt(1, MAX_VALUE));
+    return (byte) Math.abs(FixhConstants.SECURE_RANDOM.nextInt(1, FixhConstants.SIGNED_NIBBLE_MAX_VALUE));
   }
 
   public static byte getUnsignedBoundary() {
-    return (byte) FixhConstants.SECURE_RANDOM.nextInt(0, UNSIGNED_MAX_VALUE);
+    return (byte) FixhConstants.SECURE_RANDOM.nextInt(0, FixhConstants.UNSIGNED_NIBBLE_MAX_VALUE);
   }
 
   public static byte getGreaterThanUnsignedByteMaxValue() {
-    return (byte) FixhConstants.SECURE_RANDOM.nextInt(UNSIGNED_MAX_VALUE + 1, Byte.MAX_VALUE);
+    return (byte) FixhConstants.SECURE_RANDOM.nextInt(FixhConstants.UNSIGNED_NIBBLE_MAX_VALUE + 1, Byte.MAX_VALUE);
   }
 
   public static byte giveMeOneWithout(List<Byte> without) {

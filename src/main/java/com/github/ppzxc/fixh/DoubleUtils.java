@@ -1,8 +1,8 @@
 package com.github.ppzxc.fixh;
 
-public final class RandomDouble {
+public final class DoubleUtils {
 
-  private RandomDouble() {
+  private DoubleUtils() {
   }
 
   public static double giveMeOne() {

@@ -1,8 +1,8 @@
 package com.github.ppzxc.fixh;
 
-public final class RandomLong {
+public final class LongUtils {
 
-  private RandomLong() {
+  private LongUtils() {
   }
 
   public static long giveMeOne() {

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class RandomInteger {
+public final class IntegerUtils {
 
-  private RandomInteger() {
+  private IntegerUtils() {
   }
 
   public static int giveMeOne() {
@@ -52,10 +52,10 @@ public final class RandomInteger {
   }
 
   public static long getUnsignedBoundary() {
-    return FixhConstants.SECURE_RANDOM.nextLong(0, UnsignedMaxValues.INT);
+    return FixhConstants.SECURE_RANDOM.nextLong(0, FixhConstants.UNSIGNED_MAX_VALUE_INT);
   }
 
   public static long getGreaterThanUnsignedIntegerMaxValue() {
-    return FixhConstants.SECURE_RANDOM.nextLong(UnsignedMaxValues.INT + 1, Long.MAX_VALUE);
+    return FixhConstants.SECURE_RANDOM.nextLong(FixhConstants.UNSIGNED_MAX_VALUE_INT + 1, Long.MAX_VALUE);
   }
 }

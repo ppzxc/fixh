@@ -1,41 +1,14 @@
-package com.nanoit.gateway.common;
+package com.github.ppzxc.fixh;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class StringUtils {
 
   private StringUtils() {
-  }
-
-  public static String prettyBytes(long v) {
-    if (v < 1024) {
-      return v + " B";
-    }
-    int z = (63 - Long.numberOfLeadingZeros(v)) / 10;
-    return String.format("%.1f %sB", (double) v / (1L << (z * 10)), " KMGTPE".charAt(z));
-  }
-
-  public static void requireNotNull(String given) {
-    if (isNull(given)) {
-      throw new IllegalArgumentException("required not null");
-    }
-  }
-
-  public static void requireNotBlank(String given) {
-    if (isBlank(given)) {
-      throw new IllegalArgumentException("required not blank");
-    }
-  }
-
-  public static void requireNotEmpty(String given) {
-    if (isEmpty(given)) {
-      throw new IllegalArgumentException("required not empty");
-    }
   }
 
   public static boolean isBlank(String src) {
@@ -70,42 +43,8 @@ public final class StringUtils {
     return isEmpty(src) ? def : src;
   }
 
-  public static String getOnlyNumbers(String str) {
-    if (str == null) {
-      return "";
-    }
-
-    StringBuilder sb = new StringBuilder();//버퍼 설정
-    sb.setLength(0);// 초기화
-    IntStream.range(0, str.length())
-      .filter(i -> Character.isDigit(str.charAt(i)))
-      .forEach(i -> sb.append(str.charAt(i)));
-    return sb.toString();
-  }
-
   public static String getCurrentPath() throws IOException {
     return (new File(".")).getCanonicalFile().getPath();
-  }
-
-  public static String[] getFileNames(String path, final String patternName) {
-    File directory = new File(path);
-
-    return directory.list((dir, name) -> name.startsWith(patternName));
-  }
-
-  public static String getOnlyDigit(String str) {
-    if (str != null && !str.isEmpty()) {
-      StringBuffer sb = new StringBuffer();
-      Pattern p = Pattern.compile("[^\\d]");
-      Matcher m = p.matcher(str);
-      while (m.find()) {
-        m.appendReplacement(sb, "");
-      }
-      m.appendTail(sb);
-      return sb.toString();
-    } else {
-      return "";
-    }
   }
 
   public static void requiredNonBlank(String given) {
@@ -131,29 +70,65 @@ public final class StringUtils {
       .collect(Collectors.joining());
   }
 
-  public static String joinPath(String... paths) {
-    return IntStream.range(0, paths.length)
-      .mapToObj(i -> {
-        String path = paths[i];
-        if (i != paths.length - 1) {
-          path = path + PathUtils.getFileSeparator();
-        }
-        return path;
-      }).collect(Collectors.joining());
-  }
-
   public static String join(String... paths) {
     return String.join("", paths);
   }
 
-  public static String generateKey(int length) {
+  public static String lowerCase(int length) {
     int leftLimit = 97; // letter 'a'
     int rightLimit = 122; // letter 'z'
     return IntStream.range(0, length)
       .mapToObj(
         i -> String.valueOf(
-          (char) (leftLimit + (int) (RandomConstants.getSecureRandom().nextFloat() * (rightLimit - leftLimit + 1)))))
+          (char) (leftLimit + (int) (FixhConstants.SECURE_RANDOM.nextFloat() * (rightLimit - leftLimit + 1)))))
       .collect(Collectors.joining());
+  }
+
+  public static String giveMeOne() {
+    return giveMeOne(512);
+  }
+
+  public static String giveMeOne(int origin, int bound) {
+    return giveMeOne(FixhConstants.SECURE_RANDOM.nextInt(origin, bound));
+  }
+
+  public static String giveMeOne(int origin, int bound, int... without) {
+    while (true) {
+      int givenSize = FixhConstants.SECURE_RANDOM.nextInt(origin, bound);
+      if (Arrays.stream(without).noneMatch(w -> w == givenSize)) {
+        return giveMeOne(givenSize);
+      }
+    }
+  }
+
+  public static String giveMeOne(int length) {
+    int leftLimit = 97; // letter 'a'
+    int rightLimit = 122; // letter 'z'
+    StringBuilder buffer = new StringBuilder(length);
+    for (int i = 0; i < length; i++) {
+      int randomLimitedInt = leftLimit + (int)
+        (FixhConstants.SECURE_RANDOM.nextFloat() * (rightLimit - leftLimit + 1));
+      buffer.append((char) randomLimitedInt);
+    }
+    return buffer.toString();
+  }
+
+  public static void requireNotNull(String given) {
+    if (isNull(given)) {
+      throw new IllegalArgumentException("required not null");
+    }
+  }
+
+  public static void requireNotBlank(String given) {
+    if (isBlank(given)) {
+      throw new IllegalArgumentException("required not blank");
+    }
+  }
+
+  public static void requireNotEmpty(String given) {
+    if (isEmpty(given)) {
+      throw new IllegalArgumentException("required not empty");
+    }
   }
 
   public static String requireNonNull(String value, RuntimeException exception) {
