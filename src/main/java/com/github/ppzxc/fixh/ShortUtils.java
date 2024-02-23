@@ -1,6 +1,7 @@
 package com.github.ppzxc.fixh;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class ShortUtils {
 
@@ -8,28 +9,28 @@ public final class ShortUtils {
   }
 
   public static short getNegative() {
-    return (short) FixhConstants.SECURE_RANDOM.nextInt(Short.MIN_VALUE, -1);
+    return (short) ThreadLocalRandom.current().nextInt(Short.MIN_VALUE, -1);
   }
 
   public static short getPositive() {
-    return (short) FixhConstants.SECURE_RANDOM.nextInt(1, Short.MAX_VALUE);
+    return (short) ThreadLocalRandom.current().nextInt(1, Short.MAX_VALUE);
   }
 
   public static int getUnsignedBoundary() {
-    return FixhConstants.SECURE_RANDOM.nextInt(0, FixhConstants.UNSIGNED_MAX_VALUE_SHORT);
+    return ThreadLocalRandom.current().nextInt(0, FixhConstants.UNSIGNED_MAX_VALUE_SHORT);
   }
 
   public static int getGreaterThanUnsignedIntegerMaxValue() {
-    return FixhConstants.SECURE_RANDOM.nextInt(FixhConstants.UNSIGNED_MAX_VALUE_SHORT + 1, Short.MAX_VALUE);
+    return ThreadLocalRandom.current().nextInt(FixhConstants.UNSIGNED_MAX_VALUE_SHORT + 1, Short.MAX_VALUE);
   }
 
   public static short giveMeOne() {
-    return (short) FixhConstants.SECURE_RANDOM.nextInt(Short.MIN_VALUE, Short.MAX_VALUE);
+    return (short) ThreadLocalRandom.current().nextInt(Short.MIN_VALUE, Short.MAX_VALUE);
   }
 
   public static short giveMeOneWithout(List<Short> without) {
     while (true) {
-      short given = (short) FixhConstants.SECURE_RANDOM.nextInt(Short.MIN_VALUE, Short.MAX_VALUE);
+      short given = (short) ThreadLocalRandom.current().nextInt(Short.MIN_VALUE, Short.MAX_VALUE);
       if (without.stream().noneMatch(withoutValue -> withoutValue == given)) {
         return given;
       }

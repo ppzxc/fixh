@@ -1,6 +1,7 @@
 package com.github.ppzxc.fixh;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class ByteUtils {
 
@@ -16,23 +17,23 @@ public final class ByteUtils {
   }
 
   public static byte getAscii() {
-    return (byte) FixhConstants.SECURE_RANDOM.nextInt(0, 127);
+    return (byte) ThreadLocalRandom.current().nextInt(0, 127);
   }
 
   public static byte getNegative() {
-    return (byte) FixhConstants.SECURE_RANDOM.nextInt(Byte.MIN_VALUE, -1);
+    return (byte) ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, -1);
   }
 
   public static byte getPositive() {
-    return (byte) Math.abs(FixhConstants.SECURE_RANDOM.nextInt(1, Byte.MAX_VALUE));
+    return (byte) Math.abs(ThreadLocalRandom.current().nextInt(1, Byte.MAX_VALUE));
   }
 
   public static short getUnsignedBoundary() {
-    return (short) FixhConstants.SECURE_RANDOM.nextInt(0, FixhConstants.UNSIGNED_MAX_VALUE_BYTE);
+    return (short) ThreadLocalRandom.current().nextInt(0, FixhConstants.UNSIGNED_MAX_VALUE_BYTE);
   }
 
   public static short getGreaterThanUnsignedByteMaxValue() {
-    return (short) FixhConstants.SECURE_RANDOM.nextInt(FixhConstants.UNSIGNED_MAX_VALUE_BYTE + 1, Short.MAX_VALUE);
+    return (short) ThreadLocalRandom.current().nextInt(FixhConstants.UNSIGNED_MAX_VALUE_BYTE + 1, Short.MAX_VALUE);
   }
 
   public static byte giveMeOneWithout(byte without) {
@@ -46,7 +47,7 @@ public final class ByteUtils {
 
   public static byte giveMeOneWithout(List<Byte> without) {
     while (true) {
-      int given = FixhConstants.SECURE_RANDOM.nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE);
+      int given = ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE);
       if (without.stream().noneMatch(b -> b == given)) {
         return (byte) given;
       }

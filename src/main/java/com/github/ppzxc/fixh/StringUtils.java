@@ -3,6 +3,7 @@ package com.github.ppzxc.fixh;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -89,12 +90,12 @@ public final class StringUtils {
   }
 
   public static String giveMeOne(int origin, int bound) {
-    return giveMeOne(FixhConstants.SECURE_RANDOM.nextInt(origin, bound));
+    return giveMeOne(ThreadLocalRandom.current().nextInt(origin, bound));
   }
 
   public static String giveMeOne(int origin, int bound, int... without) {
     while (true) {
-      int givenSize = FixhConstants.SECURE_RANDOM.nextInt(origin, bound);
+      int givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
       if (Arrays.stream(without).noneMatch(w -> w == givenSize)) {
         return giveMeOne(givenSize);
       }

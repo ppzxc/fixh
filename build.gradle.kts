@@ -3,11 +3,11 @@ plugins {
 }
 
 group = "com.github.ppzxc"
-version = "0.0.1"
+version = "0.0.2"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
@@ -15,8 +15,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
 tasks.test {

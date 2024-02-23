@@ -9,11 +9,19 @@ public final class DoubleUtils {
     return FixhConstants.SECURE_RANDOM.nextDouble();
   }
 
-  public static double getNegative() {
-    return FixhConstants.SECURE_RANDOM.nextDouble(Double.MIN_VALUE, -1);
+  public static double giveMeNegative() {
+    double given = giveMeOne();
+    if (given > 0) {
+      return given * -1;
+    }
+    return given;
   }
 
-  public static double getPositive() {
-    return FixhConstants.SECURE_RANDOM.nextDouble(1, Double.MAX_VALUE);
+  public static double giveMePositive() {
+    double given = giveMeOne();
+    if (given < 0) {
+      return given * -1;
+    }
+    return given;
   }
 }
