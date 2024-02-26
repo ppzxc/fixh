@@ -1,5 +1,6 @@
 package com.github.ppzxc.fixh;
 
+import com.github.ppzxc.fixh.UserAgentUtils.Singleton;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -163,5 +164,14 @@ public final class RandomUtils {
     return IntStream.range(0, arrayLength)
       .mapToObj(value -> String.valueOf(ThreadLocalRandom.current().nextInt(stringLength)))
       .collect(Collectors.toList());
+  }
+
+  public static RandomUtils getInstance() {
+    return RandomUtils.Singleton.INSTANCE;
+  }
+
+  private static final class Singleton {
+
+    private static final RandomUtils INSTANCE = new RandomUtils();
   }
 }
