@@ -1,6 +1,5 @@
 package com.github.ppzxc.fixh;
 
-import com.github.ppzxc.fixh.UserAgentUtils.Singleton;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
