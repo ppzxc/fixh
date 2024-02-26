@@ -7,10 +7,12 @@ import java.util.Map.Entry;
 
 public final class UserAgentUtils {
 
-  private static final Map<String, String[]> uaMap = new HashMap<>();
-  private static final Map<String, Double> freqMap = new HashMap<>();
+  private final Map<String, String[]> uaMap;
+  private final Map<String, Double> freqMap;
 
-  static {
+  private UserAgentUtils() {
+    this.uaMap = new HashMap<>();
+    this.freqMap = new HashMap<>();
 
     freqMap.put("Internet Explorer", 11.8);
     freqMap.put("Firefox", 28.2);
@@ -1648,7 +1650,11 @@ public final class UserAgentUtils {
     });
   }
 
-  public static String getRandomUserAgent() {
+  public static UserAgentUtils getInstance() {
+    return Singleton.INSTANCE;
+  }
+
+  public String getRandomUserAgent() {
     double rand = Math.random() * 100;
     String browser = null;
     double count = 0.0;
@@ -1666,5 +1672,10 @@ public final class UserAgentUtils {
 
     String[] userAgents = uaMap.get(browser);
     return userAgents[(int) Math.floor(Math.random() * userAgents.length)];
+  }
+
+  private static final class Singleton {
+
+    private static final UserAgentUtils INSTANCE = new UserAgentUtils();
   }
 }
