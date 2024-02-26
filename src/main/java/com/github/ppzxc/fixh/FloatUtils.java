@@ -1,27 +1,29 @@
 package com.github.ppzxc.fixh;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public final class FloatUtils {
 
   private FloatUtils() {
   }
 
   public static float giveMeOne() {
-    return FixhConstants.SECURE_RANDOM.nextFloat();
+    return ThreadLocalRandom.current().nextFloat();
   }
 
   public static float giveMeNegative() {
-    float nextFloat = giveMeOne();
-    if (nextFloat > 0) {
-      return nextFloat * -1;
+    float next = giveMeOne();
+    if (next > 0) {
+      return next * -1;
     }
-    return nextFloat;
+    return next;
   }
 
   public static float giveMePositive() {
-    float nextFloat = giveMeOne();
-    if (nextFloat < 0) {
-      return nextFloat * -1;
+    float next = giveMeOne();
+    if (next < 0) {
+      return next * -1;
     }
-    return nextFloat;
+    return next;
   }
 }
