@@ -164,4 +164,13 @@ public final class RandomUtils {
       .mapToObj(value -> String.valueOf(ThreadLocalRandom.current().nextInt(stringLength)))
       .collect(Collectors.toList());
   }
+
+  public static RandomUtils getInstance() {
+    return RandomUtils.Singleton.INSTANCE;
+  }
+
+  private static final class Singleton {
+
+    private static final RandomUtils INSTANCE = new RandomUtils();
+  }
 }
