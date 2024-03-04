@@ -1,11 +1,10 @@
-package com.github.ppzxc.fixh;
+package io.github.ppzxc.fixh;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 import java.util.List;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 class IntUtilsTest {
 

@@ -1,4 +1,4 @@
-package com.github.ppzxc.fixh;
+package io.github.ppzxc.fixh;
 
 /**
  * The type Object utils.
