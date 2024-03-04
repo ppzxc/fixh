@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * The type User agent utils.
+ */
 public final class UserAgentUtils {
 
   private final Map<String, String[]> uaMap;
@@ -1650,10 +1653,20 @@ public final class UserAgentUtils {
     });
   }
 
+  /**
+   * Gets instance.
+   *
+   * @return the instance
+   */
   public static UserAgentUtils getInstance() {
     return Singleton.INSTANCE;
   }
 
+  /**
+   * Gets random user agent.
+   *
+   * @return the random user agent
+   */
   public String getRandomUserAgent() {
     double rand = Math.random() * 100;
     String browser = null;
