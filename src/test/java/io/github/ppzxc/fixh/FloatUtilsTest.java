@@ -1,4 +1,4 @@
-package com.github.ppzxc.fixh;
+package io.github.ppzxc.fixh;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
