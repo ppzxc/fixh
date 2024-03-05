@@ -96,7 +96,7 @@ public final class IntUtils {
    * @return the int
    */
   public static int giveMeOne(int origin, int bound) {
-    return ThreadLocalRandom.current().nextInt(bound + origin);
+    return ThreadLocalRandom.current().nextInt(origin, bound);
   }
 
   /**
