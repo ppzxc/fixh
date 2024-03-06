@@ -58,12 +58,7 @@ public final class ByteUtils {
    * @return the unsigned boundary
    */
   public static short getUnsignedBoundary() {
-    short unsignedInt;
-    do {
-      unsignedInt = (short) Byte.toUnsignedInt(
-        (byte) ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE));
-    } while (unsignedInt == 0);
-    return unsignedInt;
+    return (short) Byte.toUnsignedInt((byte) ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE));
   }
 
   /**
