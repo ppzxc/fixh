@@ -1,6 +1,5 @@
 package io.github.ppzxc.fixh;
 
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -44,7 +43,7 @@ public final class ShortUtils {
    * @return the greater than unsigned integer max value
    */
   public static int getGreaterThanUnsignedIntegerMaxValue() {
-    return ThreadLocalRandom.current().nextInt(FixhConstants.UNSIGNED_MAX_VALUE_SHORT + 1, Short.MAX_VALUE);
+    return ThreadLocalRandom.current().nextInt(FixhConstants.UNSIGNED_MAX_VALUE_SHORT + 1, Integer.MAX_VALUE);
   }
 
   /**
@@ -54,20 +53,5 @@ public final class ShortUtils {
    */
   public static short giveMeOne() {
     return (short) ThreadLocalRandom.current().nextInt(Short.MIN_VALUE, Short.MAX_VALUE);
-  }
-
-  /**
-   * Give me one without short.
-   *
-   * @param without the without
-   * @return the short
-   */
-  public static short giveMeOneWithout(List<Short> without) {
-    while (true) {
-      short given = (short) ThreadLocalRandom.current().nextInt(Short.MIN_VALUE, Short.MAX_VALUE);
-      if (without.stream().noneMatch(withoutValue -> withoutValue == given)) {
-        return given;
-      }
-    }
   }
 }

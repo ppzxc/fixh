@@ -1669,7 +1669,7 @@ public final class UserAgentUtils {
    */
   public String getRandomUserAgent() {
     double rand = Math.random() * 100;
-    String browser = null;
+    String browser = "Chrome";
     double count = 0.0;
     for (Entry<String, Double> freq : freqMap.entrySet()) {
       count += freq.getValue();
@@ -1677,10 +1677,6 @@ public final class UserAgentUtils {
         browser = freq.getKey();
         break;
       }
-    }
-
-    if (browser == null) {
-      browser = "Chrome";
     }
 
     String[] userAgents = uaMap.get(browser);

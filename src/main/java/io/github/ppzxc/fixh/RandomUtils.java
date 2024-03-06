@@ -51,48 +51,6 @@ public final class RandomUtils {
   }
 
   /**
-   * Integer int.
-   *
-   * @param length  the length
-   * @param minimum the minimum
-   * @return the int
-   */
-  public int integer(int length, int minimum) {
-    return ThreadLocalRandom.current().nextInt(length) + minimum;
-  }
-
-  /**
-   * Integer int.
-   *
-   * @param length the length
-   * @return the int
-   */
-  public int integer(int length) {
-    return ThreadLocalRandom.current().nextInt(length);
-  }
-
-  /**
-   * Number string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String number(int length) {
-    return IntStream.range(0, length)
-      .mapToObj(i -> String.valueOf(ThreadLocalRandom.current().nextInt(9)))
-      .collect(Collectors.joining());
-  }
-
-  /**
-   * Integer int.
-   *
-   * @return the int
-   */
-  public int integer() {
-    return ThreadLocalRandom.current().nextInt();
-  }
-
-  /**
    * Cell phone number string.
    *
    * @return the string
@@ -154,48 +112,6 @@ public final class RandomUtils {
       stringBuilder.append(ch);
     }
     return stringBuilder.toString();
-  }
-
-  /**
-   * Integer by index int.
-   *
-   * @param index the index
-   * @return the int
-   */
-  public int integerByIndex(int index) {
-    return ThreadLocalRandom.current().nextInt(index);
-  }
-
-  /**
-   * Positive long long.
-   *
-   * @return the long
-   */
-  public long positiveLong() {
-    return positiveLong(1L, 999999999999999999L);
-  }
-
-  /**
-   * Positive long long.
-   *
-   * @param min the min
-   * @param max the max
-   * @return the long
-   */
-  public long positiveLong(long min, long max) {
-    return ThreadLocalRandom.current().nextLong() % (max - min) + max;
-  }
-
-  /**
-   * Long by number of digit string.
-   *
-   * @param numberOfDigit the number of digit
-   * @return the string
-   */
-  public String longByNumberOfDigit(int numberOfDigit) {
-    return IntStream.range(0, numberOfDigit)
-      .mapToObj(i -> String.valueOf(ThreadLocalRandom.current().nextInt(9) + 1))
-      .collect(Collectors.joining());
   }
 
   /**
@@ -322,6 +238,61 @@ public final class RandomUtils {
     return IntStream.range(0, arrayLength)
       .mapToObj(value -> String.valueOf(ThreadLocalRandom.current().nextInt(stringLength)))
       .collect(Collectors.toList());
+  }
+
+  /**
+   * String string.
+   *
+   * @return the string
+   */
+  public String string() {
+    return string(512);
+  }
+
+  /**
+   * String string.
+   *
+   * @param origin the origin
+   * @param bound  the bound
+   * @return the string
+   */
+  public String string(int origin, int bound) {
+    return string(ThreadLocalRandom.current().nextInt(origin, bound));
+  }
+
+  /**
+   * String string.
+   *
+   * @param origin  the origin
+   * @param bound   the bound
+   * @param without the without
+   * @return the string
+   */
+  public String string(int origin, int bound, int... without) {
+    while (true) {
+      int givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
+      if (Arrays.stream(without).noneMatch(w -> w == givenSize)) {
+        return string(givenSize);
+      }
+    }
+  }
+
+  /**
+   * String string.
+   *
+   * @param length the length
+   * @return the string
+   */
+  public String string(int length) {
+    int leftLimit = 97; // letter 'a'
+    int rightLimit = 122; // letter 'z'
+    StringBuilder buffer = new StringBuilder(length);
+    for (int i = 0; i < length; i++) {
+      int randomLimitedInt = leftLimit + (int)
+        (ThreadLocalRandom.current().nextFloat() * (rightLimit - leftLimit + 1));
+      buffer.append((char) randomLimitedInt);
+    }
+    return buffer.toString();
   }
 
   /**

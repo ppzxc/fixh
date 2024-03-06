@@ -58,7 +58,12 @@ public final class ByteUtils {
    * @return the unsigned boundary
    */
   public static short getUnsignedBoundary() {
-    return (short) ThreadLocalRandom.current().nextInt(0, FixhConstants.UNSIGNED_MAX_VALUE_BYTE);
+    short unsignedInt;
+    do {
+      unsignedInt = (short) Byte.toUnsignedInt(
+        (byte) ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE));
+    } while (unsignedInt == 0);
+    return unsignedInt;
   }
 
   /**
@@ -77,12 +82,11 @@ public final class ByteUtils {
    * @return the byte
    */
   public static byte giveMeOneWithout(byte without) {
-    while (true) {
-      byte given = giveMeOne();
-      if (without != given) {
-        return given;
-      }
-    }
+    byte given;
+    do {
+      given = giveMeOne();
+    } while (without == given);
+    return given;
   }
 
   /**
@@ -92,12 +96,11 @@ public final class ByteUtils {
    * @return the byte
    */
   public static byte giveMeOneWithout(List<Byte> without) {
-    while (true) {
-      int given = ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE);
-      if (without.stream().noneMatch(b -> b == given)) {
-        return (byte) given;
-      }
-    }
+    int given;
+    do {
+      given = ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE);
+    } while (without.contains((byte) given));
+    return (byte) given;
   }
 
   /**
@@ -107,7 +110,7 @@ public final class ByteUtils {
    */
   public static byte giveMeOne() {
     byte[] given = new byte[1];
-    FixhConstants.SECURE_RANDOM.nextBytes(given);
+    ThreadLocalRandom.current().nextBytes(given);
     return given[0];
   }
 }

@@ -1,9 +1,5 @@
 package io.github.ppzxc.fixh;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -97,27 +93,6 @@ public final class StringUtils {
   }
 
   /**
-   * Gets current path.
-   *
-   * @return the current path
-   * @throws IOException the io exception
-   */
-  public static String getCurrentPath() throws IOException {
-    return (new File(".")).getCanonicalFile().getPath();
-  }
-
-  /**
-   * Required non blank.
-   *
-   * @param given the given
-   */
-  public static void requiredNonBlank(String given) {
-    if (isBlank(given)) {
-      throw new IllegalArgumentException("input is blank");
-    }
-  }
-
-  /**
    * Left pad string.
    *
    * @param type  the type
@@ -158,77 +133,6 @@ public final class StringUtils {
    */
   public static String join(String... paths) {
     return String.join("", paths);
-  }
-
-  /**
-   * Lower case string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public static String lowerCase(int length) {
-    int leftLimit = 97; // letter 'a'
-    int rightLimit = 122; // letter 'z'
-    return IntStream.range(0, length)
-      .mapToObj(
-        i -> String.valueOf(
-          (char) (leftLimit + (int) (FixhConstants.SECURE_RANDOM.nextFloat() * (rightLimit - leftLimit + 1)))))
-      .collect(Collectors.joining());
-  }
-
-  /**
-   * Give me one string.
-   *
-   * @return the string
-   */
-  public static String giveMeOne() {
-    return giveMeOne(512);
-  }
-
-  /**
-   * Give me one string.
-   *
-   * @param origin the origin
-   * @param bound  the bound
-   * @return the string
-   */
-  public static String giveMeOne(int origin, int bound) {
-    return giveMeOne(ThreadLocalRandom.current().nextInt(origin, bound));
-  }
-
-  /**
-   * Give me one string.
-   *
-   * @param origin  the origin
-   * @param bound   the bound
-   * @param without the without
-   * @return the string
-   */
-  public static String giveMeOne(int origin, int bound, int... without) {
-    while (true) {
-      int givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
-      if (Arrays.stream(without).noneMatch(w -> w == givenSize)) {
-        return giveMeOne(givenSize);
-      }
-    }
-  }
-
-  /**
-   * Give me one string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public static String giveMeOne(int length) {
-    int leftLimit = 97; // letter 'a'
-    int rightLimit = 122; // letter 'z'
-    StringBuilder buffer = new StringBuilder(length);
-    for (int i = 0; i < length; i++) {
-      int randomLimitedInt = leftLimit + (int)
-        (FixhConstants.SECURE_RANDOM.nextFloat() * (rightLimit - leftLimit + 1));
-      buffer.append((char) randomLimitedInt);
-    }
-    return buffer.toString();
   }
 
   /**
