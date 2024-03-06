@@ -1,9 +1,5 @@
 package io.github.ppzxc.fixh;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
-
 /**
  * The type Fixh constants.
  */
@@ -34,11 +30,6 @@ public final class FixhConstants {
    * The constant SUN.
    */
   public static final String SUN = "SUN";
-  /**
-   * The constant SECURE_RANDOM.
-   */
-  public static final SecureRandom SECURE_RANDOM;
-
   /**
    * The constant UNSIGNED_MAX_VALUE_SHORT.
    */
@@ -85,13 +76,5 @@ public final class FixhConstants {
   public static final int UNSIGNED_NIBBLE_MAX_VALUE = 31;
 
   private FixhConstants() {
-  }
-
-  static {
-    try {
-      SECURE_RANDOM = SecureRandom.getInstance(SHA_1_PRNG, SUN);
-    } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-      throw new RuntimeException(e);
-    }
   }
 }
