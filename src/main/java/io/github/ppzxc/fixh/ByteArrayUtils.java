@@ -1,6 +1,7 @@
 package io.github.ppzxc.fixh;
 
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The type Byte array utils.
@@ -18,7 +19,7 @@ public final class ByteArrayUtils {
    */
   public static byte[] giveMeOne(int length) {
     byte[] bytes = new byte[length];
-    FixhConstants.SECURE_RANDOM.nextBytes(bytes);
+    ThreadLocalRandom.current().nextBytes(bytes);
     return bytes;
   }
 

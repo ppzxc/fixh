@@ -1,5 +1,7 @@
 package io.github.ppzxc.fixh;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * The type Boolean utils.
  */
@@ -14,6 +16,6 @@ public final class BooleanUtils {
    * @return the boolean
    */
   public static boolean giveMeOne() {
-    return FixhConstants.SECURE_RANDOM.nextBoolean();
+    return ThreadLocalRandom.current().nextBoolean();
   }
 }

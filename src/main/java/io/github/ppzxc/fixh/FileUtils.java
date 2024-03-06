@@ -14,10 +14,10 @@ public final class FileUtils {
    * Get file names string [ ].
    *
    * @param path    the path
-   * @param pattern the pattern
+   * @param startsWith the pattern
    * @return the string [ ]
    */
-  public static String[] getFileNames(String path, String pattern) {
-    return new File(path).list((dir, name) -> name.startsWith(pattern));
+  public static String[] getFileNames(String path, String startsWith) {
+    return new File(path).list((dir, name) -> name.startsWith(startsWith));
   }
 }

@@ -35,7 +35,7 @@ public final class NibbleUtils {
    * @return the unsigned boundary
    */
   public static byte getUnsignedBoundary() {
-    return (byte) ThreadLocalRandom.current().nextInt(0, FixhConstants.UNSIGNED_NIBBLE_MAX_VALUE);
+    return (byte) ThreadLocalRandom.current().nextInt(1, FixhConstants.UNSIGNED_NIBBLE_MAX_VALUE);
   }
 
   /**

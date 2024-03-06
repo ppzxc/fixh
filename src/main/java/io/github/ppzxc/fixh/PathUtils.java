@@ -1,5 +1,7 @@
 package io.github.ppzxc.fixh;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,8 +10,6 @@ import java.util.stream.IntStream;
  * The type Path utils.
  */
 public final class PathUtils {
-
-  private static final String USER_DIR = System.getProperty("user.dir");
 
   private PathUtils() {
   }
@@ -20,7 +20,7 @@ public final class PathUtils {
    * @return the user dir
    */
   public static String getUserDir() {
-    return USER_DIR;
+    return System.getProperty("user.dir");
   }
 
   /**
@@ -38,7 +38,7 @@ public final class PathUtils {
    * @param paths the paths
    * @return the string
    */
-  public static String joinPath(String... paths) {
+  public static String join(String... paths) {
     return IntStream.range(0, paths.length)
       .mapToObj(i -> {
         String path = paths[i];
@@ -47,5 +47,15 @@ public final class PathUtils {
         }
         return path;
       }).collect(Collectors.joining());
+  }
+
+  /**
+   * Gets current path.
+   *
+   * @return the current path
+   * @throws IOException the io exception
+   */
+  public static String getCurrentPath() throws IOException {
+    return (new File(".")).getCanonicalFile().getPath();
   }
 }
