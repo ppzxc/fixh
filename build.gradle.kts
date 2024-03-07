@@ -36,13 +36,6 @@ tasks.jacocoTestReport {
         html.required = true
 //        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
-//    afterEvaluate {
-//        classDirectories.setFrom(files(classDirectories.map {
-//            fileTree(it).apply {
-//                exclude("io/github/ppzxc/fixh/ShortUtils.class")
-//            }
-//        }))
-//    }
     finalizedBy(tasks.jacocoTestCoverageVerification)
 }
 
@@ -54,7 +47,7 @@ tasks.jacocoTestCoverageVerification {
             limit {
                 counter = "BRANCH"
                 value = "COVEREDRATIO"
-                minimum = BigDecimal.valueOf(0.75)
+                minimum = BigDecimal.valueOf(0.90)
             }
         }
     }

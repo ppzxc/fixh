@@ -58,12 +58,7 @@ public final class ByteUtils {
    * @return the unsigned boundary
    */
   public static short getUnsignedBoundary() {
-    short unsignedInt;
-    do {
-      unsignedInt = (short) Byte.toUnsignedInt(
-        (byte) ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE));
-    } while (unsignedInt == 0);
-    return unsignedInt;
+    return (short) ThreadLocalRandom.current().nextInt(1, FixhConstants.UNSIGNED_MAX_VALUE_BYTE);
   }
 
   /**
@@ -78,14 +73,16 @@ public final class ByteUtils {
   /**
    * Give me one without byte.
    *
+   * @param origin  the origin
+   * @param bound   the bound
    * @param without the without
    * @return the byte
    */
-  public static byte giveMeOneWithout(byte without) {
-    byte given;
-    do {
-      given = giveMeOne();
-    } while (without == given);
+  public static byte giveMeOneWithout(byte origin, byte bound, byte without) {
+    byte given = giveMeOne(origin, bound);
+    if (given == without) {
+      return giveMeOneWithout(origin, bound, without);
+    }
     return given;
   }
 
@@ -106,11 +103,20 @@ public final class ByteUtils {
   /**
    * Give me one byte.
    *
+   * @param origin the origin
+   * @param bound  the bound
+   * @return the byte
+   */
+  public static byte giveMeOne(byte origin, byte bound) {
+    return (byte) ThreadLocalRandom.current().nextInt(origin, bound);
+  }
+
+  /**
+   * Give me one byte.
+   *
    * @return the byte
    */
   public static byte giveMeOne() {
-    byte[] given = new byte[1];
-    ThreadLocalRandom.current().nextBytes(given);
-    return given[0];
+    return giveMeOne(Byte.MIN_VALUE, Byte.MAX_VALUE);
   }
 }
