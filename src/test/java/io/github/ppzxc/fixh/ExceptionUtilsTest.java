@@ -56,4 +56,25 @@ class ExceptionUtilsTest {
     assertThat(expected).isInstanceOf(RuntimeException.class);
     assertThat(ExceptionUtils.findCause(expected, ClosedChannelException.class)).isInstanceOf(NullPointerException.class);
   }
+
+  @RepeatedTest(10)
+  void should_return_extends_cause() {
+    IllegalArgumentException expected = new IllegalArgumentException(new PreTestException(new IllegalStateException()));
+    assertThat(expected).isInstanceOf(IllegalArgumentException.class);
+    assertThat(ExceptionUtils.findCause(expected, TestException.class)).isInstanceOf(PreTestException.class);
+  }
+
+  private static class TestException extends RuntimeException {
+
+    public TestException(Throwable cause) {
+      super(cause);
+    }
+  }
+
+  private static class PreTestException extends TestException {
+
+    public PreTestException(Throwable cause) {
+      super(cause);
+    }
+  }
 }
