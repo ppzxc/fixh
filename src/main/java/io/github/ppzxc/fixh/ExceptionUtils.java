@@ -34,7 +34,7 @@ public final class ExceptionUtils {
     Class<T> find = ObjectUtils.requireNonNull(tClass);
     while (rootCause.getCause() != null) {
       rootCause = rootCause.getCause();
-      if (rootCause.getClass().equals(find)) {
+      if (rootCause.getClass().equals(find) || rootCause.getClass().getSuperclass().equals(tClass)) {
         break;
       }
     }
