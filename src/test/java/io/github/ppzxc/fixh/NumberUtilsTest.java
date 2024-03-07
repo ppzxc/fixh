@@ -12,6 +12,11 @@ class NumberUtilsTest {
   }
 
   @Test
+  void should_return_digit_2() {
+    assertThat(NumberUtils.getOnlyDigit("")).isEmpty();
+  }
+
+  @Test
   void should_return_empty() {
     assertThat(NumberUtils.getOnlyDigit(null)).isEmpty();
   }

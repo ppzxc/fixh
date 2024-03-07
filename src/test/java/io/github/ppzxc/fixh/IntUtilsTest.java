@@ -2,7 +2,6 @@ package io.github.ppzxc.fixh;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.RepeatedTest;
 
@@ -33,15 +32,13 @@ class IntUtilsTest {
   @RepeatedTest(10)
   void should_return_integer_list_when_without() {
     // given
-    int givenInt = ThreadLocalRandom.current().nextInt();
-    int given = givenInt < 0 ? givenInt * -1 : givenInt;
+    int without = 2;
 
     // when
-    List<Integer> actual = IntUtils.giveMeWithout(100, given);
+    Integer actual = IntUtils.giveMeWithout(1, 3, without);
 
     // then
-    assertThat(actual).hasSize(100);
-    assertThat(actual).doesNotContain(given);
+    assertThat(actual).isNotEqualTo(without);
   }
 
   @RepeatedTest(10)
@@ -81,5 +78,19 @@ class IntUtilsTest {
     assertThat(IntUtils.giveMePositive(bound))
       .isGreaterThan(0)
       .isLessThanOrEqualTo(bound);
+  }
+
+  @RepeatedTest(10)
+  void should_return_unsigned() {
+    assertThat(IntUtils.giveMeUnsignedBoundary())
+      .isGreaterThanOrEqualTo(0)
+      .isLessThanOrEqualTo(FixhConstants.UNSIGNED_MAX_VALUE_INT);
+  }
+
+  @RepeatedTest(10)
+  void should_return_unsigned_when_over_int_max_value() {
+    assertThat(IntUtils.giveMeGreaterThanUnsignedIntegerMaxValue())
+      .isGreaterThanOrEqualTo(FixhConstants.UNSIGNED_MAX_VALUE_INT + 1)
+      .isLessThanOrEqualTo(Long.MAX_VALUE);
   }
 }

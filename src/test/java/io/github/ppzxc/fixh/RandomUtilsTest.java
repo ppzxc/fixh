@@ -144,6 +144,12 @@ class RandomUtilsTest {
   }
 
   @RepeatedTest(10)
+  void should_return_random_string_bound_without_2() {
+    assertThat(RandomUtils.getInstance().string(1, 4, 1, 2, 3))
+      .doesNotContain("1", "2", "3");
+  }
+
+  @RepeatedTest(10)
   void should_return_random_string_when_given_length() {
     assertThat(RandomUtils.getInstance().string(IntUtils.giveMeOne(1, 1024))).isNotBlank();
   }

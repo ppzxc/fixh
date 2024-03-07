@@ -269,12 +269,15 @@ public final class RandomUtils {
    * @return the string
    */
   public String string(int origin, int bound, int... without) {
-    while (true) {
-      int givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
-      if (Arrays.stream(without).noneMatch(w -> w == givenSize)) {
-        return string(givenSize);
-      }
-    }
+    int givenSize;
+    do {
+      givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
+    } while (isNotContains(without, givenSize));
+    return string(givenSize);
+  }
+
+  private boolean isNotContains(int[] without, int match) {
+    return Arrays.stream(without).noneMatch(w -> w == match);
   }
 
   /**

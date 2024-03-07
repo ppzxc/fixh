@@ -58,10 +58,15 @@ class ByteUtilsTest {
   @RepeatedTest(10)
   void should_return_byte_when_given_without() {
     byte given = ByteUtils.giveMeOne();
-    assertThat(ByteUtils.giveMeOneWithout(given)).isNotEqualTo(given);
+    assertThat(ByteUtils.giveMeOneWithout(Byte.MIN_VALUE, Byte.MAX_VALUE, given)).isNotEqualTo(given);
   }
 
   @RepeatedTest(10)
+  void should_return_byte_when_given_without_2() {
+    assertThat(ByteUtils.giveMeOneWithout((byte) 2, (byte) 4, (byte) 2)).isEqualTo((byte) 3);
+  }
+
+  @RepeatedTest(100)
   void should_return_byte_when_given_without_list() {
     List<Byte> withoutList = IntStream.range(0, IntUtils.giveMePositive(100))
       .mapToObj(ignored -> ByteUtils.giveMeOne())
