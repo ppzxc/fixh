@@ -1,3 +1,5 @@
+[![Release](https://github.com/ppzxc/fixh/actions/workflows/release.yml/badge.svg)](https://github.com/ppzxc/fixh/actions/workflows/release.yml)
+
 # fixh
 
 - Utility
