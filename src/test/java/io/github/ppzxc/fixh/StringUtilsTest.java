@@ -3,6 +3,7 @@ package io.github.ppzxc.fixh;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 class StringUtilsTest {
@@ -99,7 +100,7 @@ class StringUtilsTest {
 
   @Test
   void should_return_default_if_empty_2() {
-    String given = RandomUtils.getInstance().string(128);
+    String given = StringUtils.giveMeOne(128);
     assertThat(StringUtils.isEmptyToDefault(given, "TEST")).isEqualTo(given);
   }
 
@@ -180,5 +181,42 @@ class StringUtilsTest {
   @Test
   void should_return_exception_when_blank_3() {
     assertThat(StringUtils.requireNonBlank("asdf", new NullPointerException("TEST"))).isEqualTo("asdf");
+  }
+
+  @RepeatedTest(10)
+  void should_return_random_string() {
+    assertThat(StringUtils.giveMeOne()).isNotBlank();
+  }
+
+  @RepeatedTest(10)
+  void should_return_random_string_bound() {
+    assertThat(StringUtils.giveMeOne(1, Byte.MAX_VALUE)).isNotBlank();
+  }
+
+  @RepeatedTest(10)
+  void should_return_random_string_bound_without() {
+    assertThat(StringUtils.giveMeOne(1, Byte.MAX_VALUE, 1, 2, 3))
+      .doesNotContain("1", "2", "3");
+  }
+
+  @RepeatedTest(10)
+  void should_return_random_string_bound_without_2() {
+    assertThat(StringUtils.giveMeOne(1, 4, 1, 2, 3))
+      .doesNotContain("1", "2", "3");
+  }
+
+  @RepeatedTest(10)
+  void should_return_random_string_when_given_length() {
+    assertThat(StringUtils.giveMeOne(IntUtils.giveMeOne(1, 1024))).isNotBlank();
+  }
+
+  @RepeatedTest(10)
+  void should_return_korean_string() {
+    assertThat(StringUtils.giveMeOneKorean(IntUtils.giveMeOne(1024))).isNotBlank();
+  }
+
+  @RepeatedTest(10)
+  void should_return_korean_string_by_bytes() {
+    assertThat(StringUtils.giveMeOneKoreanAsBytes(IntUtils.giveMeOne(1024))).isNotBlank();
   }
 }

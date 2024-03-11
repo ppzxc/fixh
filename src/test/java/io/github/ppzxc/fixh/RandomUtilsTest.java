@@ -10,147 +10,109 @@ class RandomUtilsTest {
 
   @RepeatedTest(10)
   void should_return_port() {
-    assertThat(RandomUtils.getInstance().port())
+    assertThat(RandomUtils.port())
       .isGreaterThanOrEqualTo(1024)
       .isLessThanOrEqualTo(65535);
   }
 
   @RepeatedTest(10)
   void should_return_cell_phone_number() {
-    String given = RandomUtils.getInstance().cellPhoneNumber();
+    String given = RandomUtils.cellPhoneNumber();
     assertThat(given).startsWith("010");
     assertThat(given.length()).isLessThanOrEqualTo(11);
   }
 
   @RepeatedTest(10)
   void should_return_email() {
-    assertThat(RandomUtils.getInstance().email()).contains("@").contains(".");
+    assertThat(RandomUtils.email()).contains("@").contains(".");
   }
 
   @RepeatedTest(10)
   void should_return_representative_number() {
-    String given = RandomUtils.getInstance().representativeNumber();
+    String given = RandomUtils.representativeNumber();
     assertThat(given).startsWith("15");
     assertThat(given.length()).isLessThanOrEqualTo(8);
   }
 
   @RepeatedTest(10)
   void should_return_internet_number() {
-    String given = RandomUtils.getInstance().internetNumber();
+    String given = RandomUtils.internetNumber();
     assertThat(given).startsWith("070");
     assertThat(given.length()).isLessThanOrEqualTo(11);
   }
 
   @RepeatedTest(10)
-  void should_return_korean_string() {
-    assertThat(RandomUtils.getInstance().koreanString(IntUtils.giveMeOne(1024))).isNotBlank();
-  }
-
-  @RepeatedTest(10)
-  void should_return_korean_string_by_bytes() {
-    assertThat(RandomUtils.getInstance().koreanStringByBytes(IntUtils.giveMeOne(1024))).isNotBlank();
-  }
-
-  @RepeatedTest(10)
   void should_return_url() {
-    String given = RandomUtils.getInstance().url();
-    assertThat(given).contains("://");
-    assertThat(given).contains(".com");
+    String given = RandomUtils.url();
+    assertThat(given).contains("://").contains(".com");
   }
 
   @RepeatedTest(10)
   void should_return_current_yyyMMdd() {
-    String given = RandomUtils.getInstance().yyyyMMdd();
-    assertThat(given).contains(String.valueOf(LocalDateTime.now().getYear()));
-    assertThat(given).contains(String.valueOf(LocalDateTime.now().getMonthValue()));
-    assertThat(given).contains(String.valueOf(LocalDateTime.now().getDayOfMonth()));
+    String given = RandomUtils.yyyyMMdd();
+    assertThat(given).contains(String.valueOf(LocalDateTime.now().getYear()))
+      .contains(String.valueOf(LocalDateTime.now().getMonthValue()))
+      .contains(String.valueOf(LocalDateTime.now().getDayOfMonth()));
   }
 
   @RepeatedTest(10)
   void should_return_complex_password() {
-    assertThat(RandomUtils.getInstance().complexPassword()).isNotBlank();
+    assertThat(RandomUtils.complexPassword()).isNotBlank();
   }
 
   @RepeatedTest(10)
   void should_return_lower_case_1() {
-    String given = RandomUtils.getInstance().lowerCase();
+    String given = RandomUtils.lowerCase();
     assertThat(given).isEqualTo(given.toLowerCase());
   }
 
   @RepeatedTest(10)
   void should_return_lower_case_2() {
-    String given = RandomUtils.getInstance().lowerCase(IntUtils.giveMeOne(1024));
+    String given = RandomUtils.lowerCase(IntUtils.giveMeOne(1024));
     assertThat(given).isEqualTo(given.toLowerCase());
   }
 
   @RepeatedTest(10)
   void should_return_upper_case_1() {
-    String given = RandomUtils.getInstance().upperCase();
+    String given = RandomUtils.upperCase();
     assertThat(given).isEqualTo(given.toUpperCase());
   }
 
   @RepeatedTest(10)
   void should_return_upper_case_2() {
-    String given = RandomUtils.getInstance().upperCase(IntUtils.giveMeOne(1024));
+    String given = RandomUtils.upperCase(IntUtils.giveMeOne(1024));
     assertThat(given).isEqualTo(given.toUpperCase());
   }
 
   @RepeatedTest(10)
   void should_return_digit_case_1() {
-    assertThat(RandomUtils.getInstance().digitCase()).containsOnlyDigits();
+    assertThat(RandomUtils.digitCase()).containsOnlyDigits();
   }
 
   @RepeatedTest(10)
   void should_return_digit_case_2() {
-    assertThat(RandomUtils.getInstance().digitCase(IntUtils.giveMeOne(1, 1024))).containsOnlyDigits();
+    assertThat(RandomUtils.digitCase(IntUtils.giveMeOne(1, 1024))).containsOnlyDigits();
   }
 
   @RepeatedTest(10)
   void should_return_special_case_1() {
-    assertThat(RandomUtils.getInstance().specialCase()).containsAnyOf("+", "`", "~", "!", "@", "#", "$", "%", "^", "&",
+    assertThat(RandomUtils.specialCase()).containsAnyOf("+", "`", "~", "!", "@", "#", "$", "%", "^", "&",
       "*", "{", "}", "\\", "[", "\\", "]", "\"", "'", ":", ";", ",", ".", "<", ">", "?", "/", "|", "\\", "\\");
   }
 
   @RepeatedTest(10)
   void should_return_special_case_2() {
-    assertThat(RandomUtils.getInstance().specialCase(IntUtils.giveMeOne(1024))).containsAnyOf("+", "`", "~", "!", "@",
+    assertThat(RandomUtils.specialCase(IntUtils.giveMeOne(1024))).containsAnyOf("+", "`", "~", "!", "@",
       "#", "$", "%", "^", "&",
       "*", "{", "}", "\\", "[", "\\", "]", "\"", "'", ":", ";", ",", ".", "<", ">", "?", "/", "|", "\\", "\\");
   }
 
   @RepeatedTest(10)
   void should_return_list_string() {
-    List<String> givenList = RandomUtils.getInstance().listString();
+    List<String> givenList = RandomUtils.listString();
     assertThat(givenList).isNotEmpty();
     for (String given : givenList) {
       assertThat(given).isNotBlank();
     }
-  }
-
-  @RepeatedTest(10)
-  void should_return_random_string() {
-    assertThat(RandomUtils.getInstance().string()).isNotBlank();
-  }
-
-  @RepeatedTest(10)
-  void should_return_random_string_bound() {
-    assertThat(RandomUtils.getInstance().string(1, Byte.MAX_VALUE)).isNotBlank();
-  }
-
-  @RepeatedTest(10)
-  void should_return_random_string_bound_without() {
-    assertThat(RandomUtils.getInstance().string(1, Byte.MAX_VALUE, 1, 2, 3))
-      .doesNotContain("1", "2", "3");
-  }
-
-  @RepeatedTest(10)
-  void should_return_random_string_bound_without_2() {
-    assertThat(RandomUtils.getInstance().string(1, 4, 1, 2, 3))
-      .doesNotContain("1", "2", "3");
-  }
-
-  @RepeatedTest(10)
-  void should_return_random_string_when_given_length() {
-    assertThat(RandomUtils.getInstance().string(IntUtils.giveMeOne(1, 1024))).isNotBlank();
   }
 }

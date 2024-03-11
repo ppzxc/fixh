@@ -1,6 +1,5 @@
 package io.github.ppzxc.fixh;
 
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -10,305 +9,109 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/**
- * The type Random utils.
- */
 public final class RandomUtils {
 
-  private final List<String> lowerChar;
-  private final List<String> upperChar;
-  private final List<String> digitChar;
-  private final List<String> specialChar;
-  private final List<String> httpProtocols;
+  private static final List<String> HTTP_PROTOCOLS;
+  private static final List<String> LOWER_CHAR;
+  private static final List<String> UPPER_CHAR;
+  private static final List<String> DIGIT_CHAR;
+  private static final List<String> SPECIAL_CHAR;
 
   private RandomUtils() {
-    httpProtocols = Arrays.asList("http", "https");
-    lowerChar = Stream.of("abcdefghijklmnopqrstuvwxyz")
+  }
+
+  static {
+    HTTP_PROTOCOLS = Arrays.asList("http", "https");
+    LOWER_CHAR = Stream.of("abcdefghijklmnopqrstuvwxyz")
       .map(value -> value.split(""))
       .flatMap(Arrays::stream)
       .collect(Collectors.toList());
-    upperChar = Stream.of("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    UPPER_CHAR = Stream.of("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
       .map(value -> value.split(""))
       .flatMap(Arrays::stream)
       .collect(Collectors.toList());
-    digitChar = Stream.of("1234567890")
+    DIGIT_CHAR = Stream.of("1234567890")
       .map(value -> value.split(""))
       .flatMap(Arrays::stream)
       .collect(Collectors.toList());
-    specialChar = Stream.of("+`~!@#$%^&*{}\\[\\]\"':;,.<>?/|\\\\")
+    SPECIAL_CHAR = Stream.of("+`~!@#$%^&*{}\\[\\]\"':;,.<>?/|\\\\")
       .map(value -> value.split(""))
       .flatMap(Arrays::stream)
       .collect(Collectors.toList());
   }
 
-  /**
-   * Port int.
-   *
-   * @return the int
-   */
-  public int port() {
+  public static int port() {
     return ThreadLocalRandom.current().nextInt(65535 - 1024) + 1024;
   }
 
-  /**
-   * Cell phone number string.
-   *
-   * @return the string
-   */
-  public String cellPhoneNumber() {
+  public static String cellPhoneNumber() {
     return "010" + ThreadLocalRandom.current().nextInt(99999999);
   }
 
-  /**
-   * Email string.
-   *
-   * @return the string
-   */
-  public String email() {
+  public static String email() {
     return lowerCase(10) + "@" + lowerCase(10) + "." + lowerCase(3);
   }
 
-  /**
-   * Representative number string.
-   *
-   * @return the string
-   */
-  public String representativeNumber() {
+  public static String representativeNumber() {
     return "15" + ThreadLocalRandom.current().nextInt(999999);
   }
 
-  /**
-   * Internet number string.
-   *
-   * @return the string
-   */
-  public String internetNumber() {
+  public static String internetNumber() {
     return "070" + ThreadLocalRandom.current().nextInt(99999999);
   }
 
-  /**
-   * Korean string string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String koreanString(int length) {
-    return IntStream.range(0, length)
-      .mapToObj(i -> String.valueOf((char) ((Math.random() * 11172) + 0xAC00)))
-      .collect(
-        Collectors.joining());
-  }
-
-  /**
-   * Korean string by bytes string.
-   *
-   * @param lengthOfBytes the length of bytes
-   * @return the string
-   */
-  public String koreanStringByBytes(int lengthOfBytes) {
-    StringBuilder stringBuilder = new StringBuilder();
-    while (stringBuilder.toString().getBytes(Charset.forName("MS949")).length < lengthOfBytes) {
-      char ch = (char) ((Math.random() * 11172) + 0xAC00);
-      stringBuilder.append(ch);
-    }
-    return stringBuilder.toString();
-  }
-
-  /**
-   * Url string.
-   *
-   * @return the string
-   */
-  public String url() {
-    return httpProtocols.get(ThreadLocalRandom.current().nextInt(httpProtocols.size())) + "://" + lowerCase(10)
+  public static String url() {
+    return HTTP_PROTOCOLS.get(ThreadLocalRandom.current().nextInt(HTTP_PROTOCOLS.size())) + "://" + lowerCase(10)
       + ".com";
   }
 
-  /**
-   * Yyyy m mdd string.
-   *
-   * @return the string
-   */
-  public String yyyyMMdd() {
+  public static String yyyyMMdd() {
     return new SimpleDateFormat("yyyyMMdd").format(new Date());
   }
 
-  /**
-   * Complex password string.
-   *
-   * @return the string
-   */
-  public String complexPassword() {
+  public static String complexPassword() {
     return specialCase() + digitCase(4) + upperCase() + lowerCase(10);
   }
 
-  /**
-   * Lower case string.
-   *
-   * @return the string
-   */
-  public String lowerCase() {
-    return lowerChar.stream().skip(ThreadLocalRandom.current().nextInt(lowerChar.size())).findFirst().orElse(null);
+  public static String lowerCase() {
+    return LOWER_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(LOWER_CHAR.size())).findFirst().orElse(null);
   }
 
-  /**
-   * Lower case string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String lowerCase(int length) {
+  public static String lowerCase(int length) {
     return IntStream.range(0, length).mapToObj(operand -> lowerCase()).collect(Collectors.joining());
   }
 
-  /**
-   * Upper case string.
-   *
-   * @return the string
-   */
-  public String upperCase() {
-    return upperChar.stream().skip(ThreadLocalRandom.current().nextInt(upperChar.size())).findFirst().orElse(null);
+  public static String upperCase() {
+    return UPPER_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(UPPER_CHAR.size())).findFirst().orElse(null);
   }
 
-  /**
-   * Upper case string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String upperCase(int length) {
+  public static String upperCase(int length) {
     return IntStream.range(0, length).mapToObj(operand -> upperCase()).collect(Collectors.joining());
   }
 
-  /**
-   * Digit case string.
-   *
-   * @return the string
-   */
-  public String digitCase() {
-    return digitChar.stream().skip(ThreadLocalRandom.current().nextInt(digitChar.size())).findFirst().orElse(null);
+  public static String digitCase() {
+    return DIGIT_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(DIGIT_CHAR.size())).findFirst().orElse(null);
   }
 
-  /**
-   * Digit case string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String digitCase(int length) {
+  public static String digitCase(int length) {
     return IntStream.range(0, length).mapToObj(operand -> digitCase()).collect(Collectors.joining());
   }
 
-  /**
-   * Special case string.
-   *
-   * @return the string
-   */
-  public String specialCase() {
-    return specialChar.stream().skip(ThreadLocalRandom.current().nextInt(specialChar.size())).findFirst().orElse(null);
+  public static String specialCase() {
+    return SPECIAL_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(SPECIAL_CHAR.size())).findFirst().orElse(null);
   }
 
-  /**
-   * Special case string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String specialCase(int length) {
+  public static String specialCase(int length) {
     return IntStream.range(0, length).mapToObj(operand -> specialCase()).collect(Collectors.joining());
   }
 
-  /**
-   * List string list.
-   *
-   * @return the list
-   */
-  public List<String> listString() {
+  public static List<String> listString() {
     return listString(ThreadLocalRandom.current().nextInt(9) + 1, ThreadLocalRandom.current().nextInt(9) + 1);
   }
 
-  /**
-   * List string list.
-   *
-   * @param arrayLength  the array length
-   * @param stringLength the string length
-   * @return the list
-   */
-  public List<String> listString(int arrayLength, int stringLength) {
+  public static List<String> listString(int arrayLength, int stringLength) {
     return IntStream.range(0, arrayLength)
       .mapToObj(value -> String.valueOf(ThreadLocalRandom.current().nextInt(stringLength)))
       .collect(Collectors.toList());
-  }
-
-  /**
-   * String string.
-   *
-   * @return the string
-   */
-  public String string() {
-    return string(512);
-  }
-
-  /**
-   * String string.
-   *
-   * @param origin the origin
-   * @param bound  the bound
-   * @return the string
-   */
-  public String string(int origin, int bound) {
-    return string(ThreadLocalRandom.current().nextInt(origin, bound));
-  }
-
-  /**
-   * String string.
-   *
-   * @param origin  the origin
-   * @param bound   the bound
-   * @param without the without
-   * @return the string
-   */
-  public String string(int origin, int bound, int... without) {
-    int givenSize;
-    do {
-      givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
-    } while (isNotContains(without, givenSize));
-    return string(givenSize);
-  }
-
-  private boolean isNotContains(int[] without, int match) {
-    return Arrays.stream(without).noneMatch(w -> w == match);
-  }
-
-  /**
-   * String string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String string(int length) {
-    int leftLimit = 97; // letter 'a'
-    int rightLimit = 122; // letter 'z'
-    StringBuilder buffer = new StringBuilder(length);
-    for (int i = 0; i < length; i++) {
-      int randomLimitedInt = leftLimit + (int)
-        (ThreadLocalRandom.current().nextFloat() * (rightLimit - leftLimit + 1));
-      buffer.append((char) randomLimitedInt);
-    }
-    return buffer.toString();
-  }
-
-  /**
-   * Gets instance.
-   *
-   * @return the instance
-   */
-  public static RandomUtils getInstance() {
-    return RandomUtils.Singleton.INSTANCE;
-  }
-
-  private static final class Singleton {
-
-    private static final RandomUtils INSTANCE = new RandomUtils();
   }
 }

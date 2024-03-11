@@ -17,13 +17,13 @@ class LongUtilsTest {
   void should_return_negative_long_boundary() {
     assertThat(LongUtils.giveMeNegative())
       .isGreaterThanOrEqualTo(Long.MIN_VALUE)
-      .isLessThan(0);
+      .isNegative();
   }
 
   @RepeatedTest(10)
   void should_return_positive_long_boundary() {
     assertThat(LongUtils.giveMePositive())
-      .isGreaterThan(0)
+      .isPositive()
       .isLessThanOrEqualTo(Long.MAX_VALUE);
   }
 }

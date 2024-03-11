@@ -24,9 +24,7 @@ class IntUtilsTest {
     int actual = IntUtils.giveMeOne(given);
 
     // then
-    assertThat(actual)
-      .isGreaterThan(0)
-      .isLessThanOrEqualTo(Integer.MAX_VALUE);
+    assertThat(actual).isPositive().isLessThanOrEqualTo(Integer.MAX_VALUE);
   }
 
   @RepeatedTest(10)
@@ -43,30 +41,22 @@ class IntUtilsTest {
 
   @RepeatedTest(10)
   void should_return_unsigned_integer() {
-    assertThat(IntUtils.giveMeOneUnsigned())
-      .isGreaterThan(0)
-      .isLessThanOrEqualTo(Integer.toUnsignedLong(-1));
+    assertThat(IntUtils.giveMeOneUnsigned()).isPositive().isLessThanOrEqualTo(Integer.toUnsignedLong(-1));
   }
 
   @RepeatedTest(10)
   void should_return_negative() {
-    assertThat(IntUtils.giveMeNegative())
-      .isGreaterThanOrEqualTo(Integer.MIN_VALUE)
-      .isLessThan(0);
+    assertThat(IntUtils.giveMeNegative()).isGreaterThanOrEqualTo(Integer.MIN_VALUE).isNegative();
   }
 
   @RepeatedTest(10)
   void should_return_positive() {
-    assertThat(IntUtils.giveMePositive())
-      .isGreaterThan(0)
-      .isLessThanOrEqualTo(Integer.MAX_VALUE);
+    assertThat(IntUtils.giveMePositive()).isPositive().isLessThanOrEqualTo(Integer.MAX_VALUE);
   }
 
   @RepeatedTest(10)
   void should_return_positive_boundary() {
-    assertThat(IntUtils.giveMeOne(0, Integer.MAX_VALUE))
-      .isGreaterThan(0)
-      .isLessThanOrEqualTo(Integer.MAX_VALUE);
+    assertThat(IntUtils.giveMeOne(0, Integer.MAX_VALUE)).isPositive().isLessThanOrEqualTo(Integer.MAX_VALUE);
   }
 
   @RepeatedTest(10)
@@ -75,15 +65,12 @@ class IntUtilsTest {
     int bound = IntUtils.giveMePositive();
 
     // when, then
-    assertThat(IntUtils.giveMePositive(bound))
-      .isGreaterThan(0)
-      .isLessThanOrEqualTo(bound);
+    assertThat(IntUtils.giveMePositive(bound)).isPositive().isLessThanOrEqualTo(bound);
   }
 
   @RepeatedTest(10)
   void should_return_unsigned() {
-    assertThat(IntUtils.giveMeUnsignedBoundary())
-      .isGreaterThanOrEqualTo(0)
+    assertThat(IntUtils.giveMeUnsignedBoundary()).isNotNegative()
       .isLessThanOrEqualTo(FixhConstants.UNSIGNED_MAX_VALUE_INT);
   }
 
