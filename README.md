@@ -1,4 +1,5 @@
-[![Release](https://github.com/ppzxc/fixh/actions/workflows/release.yml/badge.svg)](https://github.com/ppzxc/fixh/actions/workflows/release.yml)
+[![Release](https://github.com/ppzxc/fixh/actions/workflows/release.yml/badge.svg)](https://github.com/ppzxc/fixh/actions/workflows/release.yml) [![Coverage](.github/badges/jacoco.svg)](https://github.com/ppzxc/fixh/actions/workflows/main.yml)
+
 
 # fixh
 
