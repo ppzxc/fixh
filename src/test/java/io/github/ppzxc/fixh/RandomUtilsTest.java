@@ -42,16 +42,6 @@ class RandomUtilsTest {
   }
 
   @RepeatedTest(10)
-  void should_return_korean_string() {
-    assertThat(RandomUtils.getInstance().koreanString(IntUtils.giveMeOne(1024))).isNotBlank();
-  }
-
-  @RepeatedTest(10)
-  void should_return_korean_string_by_bytes() {
-    assertThat(RandomUtils.getInstance().koreanStringByBytes(IntUtils.giveMeOne(1024))).isNotBlank();
-  }
-
-  @RepeatedTest(10)
   void should_return_url() {
     String given = RandomUtils.getInstance().url();
     assertThat(given).contains("://");

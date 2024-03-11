@@ -209,4 +209,14 @@ class StringUtilsTest {
   void should_return_random_string_when_given_length() {
     assertThat(StringUtils.giveMeOne(IntUtils.giveMeOne(1, 1024))).isNotBlank();
   }
+
+  @RepeatedTest(10)
+  void should_return_korean_string() {
+    assertThat(StringUtils.giveMeOneKorean(IntUtils.giveMeOne(1024))).isNotBlank();
+  }
+
+  @RepeatedTest(10)
+  void should_return_korean_string_by_bytes() {
+    assertThat(StringUtils.giveMeOneKoreanAsBytes(IntUtils.giveMeOne(1024))).isNotBlank();
+  }
 }

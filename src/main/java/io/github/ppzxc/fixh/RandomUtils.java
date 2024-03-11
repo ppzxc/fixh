@@ -87,34 +87,6 @@ public final class RandomUtils {
   }
 
   /**
-   * Korean string string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String koreanString(int length) {
-    return IntStream.range(0, length)
-      .mapToObj(i -> String.valueOf((char) ((Math.random() * 11172) + 0xAC00)))
-      .collect(
-        Collectors.joining());
-  }
-
-  /**
-   * Korean string by bytes string.
-   *
-   * @param lengthOfBytes the length of bytes
-   * @return the string
-   */
-  public String koreanStringByBytes(int lengthOfBytes) {
-    StringBuilder stringBuilder = new StringBuilder();
-    while (stringBuilder.toString().getBytes(Charset.forName("MS949")).length < lengthOfBytes) {
-      char ch = (char) ((Math.random() * 11172) + 0xAC00);
-      stringBuilder.append(ch);
-    }
-    return stringBuilder.toString();
-  }
-
-  /**
    * Url string.
    *
    * @return the string
