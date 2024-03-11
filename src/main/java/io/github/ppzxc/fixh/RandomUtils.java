@@ -241,64 +241,6 @@ public final class RandomUtils {
   }
 
   /**
-   * String string.
-   *
-   * @return the string
-   */
-  public String string() {
-    return string(512);
-  }
-
-  /**
-   * String string.
-   *
-   * @param origin the origin
-   * @param bound  the bound
-   * @return the string
-   */
-  public String string(int origin, int bound) {
-    return string(ThreadLocalRandom.current().nextInt(origin, bound));
-  }
-
-  /**
-   * String string.
-   *
-   * @param origin  the origin
-   * @param bound   the bound
-   * @param without the without
-   * @return the string
-   */
-  public String string(int origin, int bound, int... without) {
-    int givenSize;
-    do {
-      givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
-    } while (isNotContains(without, givenSize));
-    return string(givenSize);
-  }
-
-  private boolean isNotContains(int[] without, int match) {
-    return Arrays.stream(without).noneMatch(w -> w == match);
-  }
-
-  /**
-   * String string.
-   *
-   * @param length the length
-   * @return the string
-   */
-  public String string(int length) {
-    int leftLimit = 97; // letter 'a'
-    int rightLimit = 122; // letter 'z'
-    StringBuilder buffer = new StringBuilder(length);
-    for (int i = 0; i < length; i++) {
-      int randomLimitedInt = leftLimit + (int)
-        (ThreadLocalRandom.current().nextFloat() * (rightLimit - leftLimit + 1));
-      buffer.append((char) randomLimitedInt);
-    }
-    return buffer.toString();
-  }
-
-  /**
    * Gets instance.
    *
    * @return the instance

@@ -31,7 +31,7 @@ class ObjectUtilsTest {
   @Test
   void should_throw_exception_2() {
     Object given = null;
-    IllegalStateException expected = new IllegalStateException(RandomUtils.getInstance().string(1024));
+    IllegalStateException expected = new IllegalStateException(StringUtils.giveMeOne(1024));
     assertThatCode(() -> ObjectUtils.requireNonNull(given, expected))
       .isInstanceOf(IllegalStateException.class)
       .hasMessage(expected.getMessage());
@@ -40,7 +40,7 @@ class ObjectUtilsTest {
   @Test
   void should_not_throw_exception_2() {
     assertThat(
-      ObjectUtils.requireNonNull("TEST", new IllegalStateException(RandomUtils.getInstance().string(1024)))).isEqualTo(
+      ObjectUtils.requireNonNull("TEST", new IllegalStateException(StringUtils.giveMeOne(1024)))).isEqualTo(
       "TEST");
   }
 }
