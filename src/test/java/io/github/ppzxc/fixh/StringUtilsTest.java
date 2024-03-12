@@ -196,27 +196,37 @@ class StringUtilsTest {
   @RepeatedTest(10)
   void should_return_random_string_bound_without() {
     assertThat(StringUtils.giveMeOne(1, Byte.MAX_VALUE, 1, 2, 3))
-      .doesNotContain("1", "2", "3");
+      .hasSizeGreaterThanOrEqualTo(4)
+      .hasSizeLessThanOrEqualTo(Byte.MAX_VALUE);
   }
 
   @RepeatedTest(10)
   void should_return_random_string_bound_without_2() {
-    assertThat(StringUtils.giveMeOne(1, 4, 1, 2, 3))
-      .doesNotContain("1", "2", "3");
+    assertThat(StringUtils.giveMeOne(1, 5, 1, 2, 3))
+      .hasSize(4);
   }
 
   @RepeatedTest(10)
   void should_return_random_string_when_given_length() {
-    assertThat(StringUtils.giveMeOne(IntUtils.giveMeOne(1, 1024))).isNotBlank();
+    assertThat(StringUtils.giveMeOne(IntUtils.giveMeOne(1, 1024)))
+      .isNotBlank()
+      .hasSizeGreaterThanOrEqualTo(1)
+      .hasSizeLessThanOrEqualTo(1023);
   }
 
   @RepeatedTest(10)
   void should_return_korean_string() {
-    assertThat(StringUtils.giveMeOneKorean(IntUtils.giveMeOne(1024))).isNotBlank();
+    assertThat(StringUtils.giveMeOneKorean(IntUtils.giveMeOne(1024)))
+      .isNotBlank()
+      .hasSizeGreaterThanOrEqualTo(1)
+      .hasSizeLessThanOrEqualTo(1023);
   }
 
   @RepeatedTest(10)
   void should_return_korean_string_by_bytes() {
-    assertThat(StringUtils.giveMeOneKoreanAsBytes(IntUtils.giveMeOne(1024))).isNotBlank();
+    assertThat(StringUtils.giveMeOneKoreanAsBytes(IntUtils.giveMeOne(1024)))
+      .isNotBlank()
+      .hasSizeGreaterThanOrEqualTo(1)
+      .hasSizeLessThanOrEqualTo(1023);
   }
 }

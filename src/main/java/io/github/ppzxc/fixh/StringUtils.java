@@ -6,47 +6,115 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * The type String utils.
+ */
 public final class StringUtils {
 
   private StringUtils() {
   }
 
+  /**
+   * Is blank boolean.
+   *
+   * @param src the src
+   * @return the boolean
+   */
   public static boolean isBlank(String src) {
     return src == null || src.isEmpty() || src.trim().isEmpty();
   }
 
+  /**
+   * Is not blank boolean.
+   *
+   * @param src the src
+   * @return the boolean
+   */
   public static boolean isNotBlank(String src) {
     return !isBlank(src);
   }
 
+  /**
+   * Nvl string.
+   *
+   * @param src the src
+   * @return the string
+   */
   public static String nvl(String src) {
     return isNull(src) ? "" : src;
   }
 
+  /**
+   * Is null boolean.
+   *
+   * @param src the src
+   * @return the boolean
+   */
   public static boolean isNull(String src) {
     return src == null;
   }
 
+  /**
+   * Is not null boolean.
+   *
+   * @param src the src
+   * @return the boolean
+   */
   public static boolean isNotNull(String src) {
     return !isNull(src);
   }
 
+  /**
+   * Is empty boolean.
+   *
+   * @param src the src
+   * @return the boolean
+   */
   public static boolean isEmpty(String src) {
     return (src == null || src.isEmpty());
   }
 
+  /**
+   * Is not empty boolean.
+   *
+   * @param src the src
+   * @return the boolean
+   */
   public static boolean isNotEmpty(String src) {
     return !isEmpty(src);
   }
 
+  /**
+   * Is empty to default string.
+   *
+   * @param src the src
+   * @param def the def
+   * @return the string
+   */
   public static String isEmptyToDefault(String src, String def) {
     return isEmpty(src) ? def : src;
   }
 
+  /**
+   * Left pad string.
+   *
+   * @param type  the type
+   * @param i     the
+   * @param space the space
+   * @return the string
+   */
   public static String leftPad(String type, int i, String space) {
     return padding(type, i, space) + type;
   }
 
+  /**
+   * Right pad string.
+   *
+   * @param type  the type
+   * @param i     the
+   * @param space the space
+   * @return the string
+   */
   public static String rightPad(String type, int i, String space) {
     return type + padding(type, i, space);
   }
@@ -60,10 +128,22 @@ public final class StringUtils {
       .collect(Collectors.joining());
   }
 
+  /**
+   * Join string.
+   *
+   * @param paths the paths
+   * @return the string
+   */
   public static String join(String... paths) {
     return String.join("", paths);
   }
 
+  /**
+   * Give me one korean string.
+   *
+   * @param length the length
+   * @return the string
+   */
   public static String giveMeOneKorean(int length) {
     return IntStream.range(0, length)
       .mapToObj(i -> String.valueOf((char) ((Math.random() * 11172) + 0xAC00)))
@@ -71,6 +151,12 @@ public final class StringUtils {
         Collectors.joining());
   }
 
+  /**
+   * Give me one korean as bytes string.
+   *
+   * @param lengthOfBytes the length of bytes
+   * @return the string
+   */
   public static String giveMeOneKoreanAsBytes(int lengthOfBytes) {
     StringBuilder stringBuilder = new StringBuilder();
     while (stringBuilder.toString().getBytes(Charset.forName("MS949")).length < lengthOfBytes) {
@@ -80,14 +166,34 @@ public final class StringUtils {
     return stringBuilder.toString();
   }
 
+  /**
+   * Give me one string.
+   *
+   * @return the string
+   */
   public static String giveMeOne() {
     return giveMeOne(512);
   }
 
+  /**
+   * Give me one string.
+   *
+   * @param origin the origin
+   * @param bound  the bound
+   * @return the string
+   */
   public static String giveMeOne(int origin, int bound) {
     return giveMeOne(ThreadLocalRandom.current().nextInt(origin, bound));
   }
 
+  /**
+   * Give me one string.
+   *
+   * @param origin  the origin
+   * @param bound   the bound
+   * @param without the without
+   * @return the string
+   */
   public static String giveMeOne(int origin, int bound, int... without) {
     int givenSize;
     do {
@@ -97,9 +203,15 @@ public final class StringUtils {
   }
 
   private static boolean isNotContains(int[] without, int match) {
-    return Arrays.stream(without).noneMatch(w -> w == match);
+    return Arrays.stream(without).anyMatch(w -> w == match);
   }
 
+  /**
+   * Give me one string.
+   *
+   * @param length the length
+   * @return the string
+   */
   public static String giveMeOne(int length) {
     int leftLimit = 97; // letter 'a'
     int rightLimit = 122; // letter 'z'
@@ -112,24 +224,46 @@ public final class StringUtils {
     return buffer.toString();
   }
 
+  /**
+   * Require not null.
+   *
+   * @param given the given
+   */
   public static void requireNotNull(String given) {
     if (isNull(given)) {
       throw new IllegalArgumentException("required not null");
     }
   }
 
+  /**
+   * Require not blank.
+   *
+   * @param given the given
+   */
   public static void requireNotBlank(String given) {
     if (isBlank(given)) {
       throw new IllegalArgumentException("required not blank");
     }
   }
 
+  /**
+   * Require not empty.
+   *
+   * @param given the given
+   */
   public static void requireNotEmpty(String given) {
     if (isEmpty(given)) {
       throw new IllegalArgumentException("required not empty");
     }
   }
 
+  /**
+   * Require non null string.
+   *
+   * @param value     the value
+   * @param exception the exception
+   * @return the string
+   */
   public static String requireNonNull(String value, RuntimeException exception) {
     if (value == null) {
       throw exception;
@@ -137,6 +271,13 @@ public final class StringUtils {
     return value;
   }
 
+  /**
+   * Require non empty string.
+   *
+   * @param value     the value
+   * @param exception the exception
+   * @return the string
+   */
   public static String requireNonEmpty(String value, RuntimeException exception) {
     if (requireNonNull(value, exception).isEmpty()) {
       throw exception;
@@ -144,6 +285,13 @@ public final class StringUtils {
     return value;
   }
 
+  /**
+   * Require non blank string.
+   *
+   * @param value     the value
+   * @param exception the exception
+   * @return the string
+   */
   public static String requireNonBlank(String value, RuntimeException exception) {
     if (requireNonEmpty(value, exception).trim().isEmpty()) {
       throw exception;
