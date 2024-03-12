@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 class ByteUtilsTest {
 
@@ -79,5 +80,19 @@ class ByteUtilsTest {
     assertThat(ByteUtils.giveMeOne())
       .isGreaterThanOrEqualTo(Byte.MIN_VALUE)
       .isLessThanOrEqualTo(Byte.MAX_VALUE);
+  }
+
+  @Test
+  void should_return_hex() {
+    // given
+    byte expected = ByteUtils.giveMeOne();
+
+    // when
+    String actual = ByteUtils.toHex(expected);
+
+    // then
+    assertThat(actual)
+      .startsWith("0x")
+      .endsWith(Integer.toHexString(expected & 0xFF));
   }
 }

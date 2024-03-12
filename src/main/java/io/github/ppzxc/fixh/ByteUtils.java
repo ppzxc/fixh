@@ -11,6 +11,10 @@ public final class ByteUtils {
   private ByteUtils() {
   }
 
+  public static String toHex(byte value) {
+    return String.format("0x%02x", value);
+  }
+
   /**
    * Length to human readable string.
    *
