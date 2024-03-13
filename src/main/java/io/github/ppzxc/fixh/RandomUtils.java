@@ -74,7 +74,7 @@ public final class RandomUtils {
   }
 
   public static String lowerCase() {
-    return LOWER_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(LOWER_CHAR.size())).findFirst().orElse(null);
+    return LOWER_CHAR.get(ThreadLocalRandom.current().nextInt(LOWER_CHAR.size()));
   }
 
   public static String lowerCase(int length) {
@@ -82,7 +82,7 @@ public final class RandomUtils {
   }
 
   public static String upperCase() {
-    return UPPER_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(UPPER_CHAR.size())).findFirst().orElse(null);
+    return UPPER_CHAR.get(ThreadLocalRandom.current().nextInt(UPPER_CHAR.size()));
   }
 
   public static String upperCase(int length) {
@@ -90,7 +90,7 @@ public final class RandomUtils {
   }
 
   public static String digitCase() {
-    return DIGIT_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(DIGIT_CHAR.size())).findFirst().orElse(null);
+    return DIGIT_CHAR.get(ThreadLocalRandom.current().nextInt(DIGIT_CHAR.size()));
   }
 
   public static String digitCase(int length) {
@@ -98,7 +98,7 @@ public final class RandomUtils {
   }
 
   public static String specialCase() {
-    return SPECIAL_CHAR.stream().skip(ThreadLocalRandom.current().nextInt(SPECIAL_CHAR.size())).findFirst().orElse(null);
+    return SPECIAL_CHAR.get(ThreadLocalRandom.current().nextInt(SPECIAL_CHAR.size()));
   }
 
   public static String specialCase(int length) {
