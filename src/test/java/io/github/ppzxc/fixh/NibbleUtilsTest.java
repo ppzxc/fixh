@@ -40,7 +40,7 @@ class NibbleUtilsTest {
       .isGreaterThanOrEqualTo(FixhConstants.UNSIGNED_NIBBLE_MAX_VALUE);
   }
 
-  @RepeatedTest(10)
+  @RepeatedTest(100)
   void should_return_nibble_without_value() {
     List<Byte> givenList = IntStream.range(0, IntUtils.giveMeOne(10))
       .mapToObj(ignored -> (byte) IntUtils.giveMeOne(-8, 7))
