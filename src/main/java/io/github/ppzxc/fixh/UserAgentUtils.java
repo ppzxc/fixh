@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * The type User agent utils.
- */
 public final class UserAgentUtils {
 
   private final String[] browserNames;
@@ -1648,20 +1645,10 @@ public final class UserAgentUtils {
     });
   }
 
-  /**
-   * Gets instance.
-   *
-   * @return the instance
-   */
   public static UserAgentUtils getInstance() {
     return Singleton.INSTANCE;
   }
 
-  /**
-   * Gets random user agent.
-   *
-   * @return the random user agent
-   */
   public String getRandomUserAgent() {
     String[] userAgents = browsers.get(browserNames[ThreadLocalRandom.current().nextInt(browserNames.length)]);
     return userAgents[ThreadLocalRandom.current().nextInt(userAgents.length)];
