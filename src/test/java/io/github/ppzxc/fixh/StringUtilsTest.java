@@ -157,7 +157,7 @@ class StringUtilsTest {
   @Test
   void should_return_exception_when_null_2() {
     NullPointerException given = new NullPointerException("TEST");
-    assertThatCode(() -> StringUtils.requireNonNull(null, given))
+    assertThatCode(() -> StringUtils.requireNotNull(null, given))
       .isInstanceOf(NullPointerException.class)
       .hasMessage("TEST");
   }
@@ -165,7 +165,7 @@ class StringUtilsTest {
   @Test
   void should_return_exception_when_empty_2() {
     NullPointerException given = new NullPointerException("TEST");
-    assertThatCode(() -> StringUtils.requireNonEmpty("", given))
+    assertThatCode(() -> StringUtils.requireNotEmpty("", given))
       .isInstanceOf(NullPointerException.class)
       .hasMessage("TEST");
   }
@@ -173,14 +173,14 @@ class StringUtilsTest {
   @Test
   void should_return_exception_when_blank_2() {
     NullPointerException given = new NullPointerException("TEST");
-    assertThatCode(() -> StringUtils.requireNonBlank("   ", given))
+    assertThatCode(() -> StringUtils.requireNotBlank("   ", given))
       .isInstanceOf(NullPointerException.class)
       .hasMessage("TEST");
   }
 
   @Test
   void should_return_exception_when_blank_3() {
-    assertThat(StringUtils.requireNonBlank("asdf", new NullPointerException("TEST"))).isEqualTo("asdf");
+    assertThat(StringUtils.requireNotBlank("asdf", new NullPointerException("TEST"))).isEqualTo("asdf");
   }
 
   @RepeatedTest(10)

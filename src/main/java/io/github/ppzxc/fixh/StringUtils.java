@@ -12,7 +12,7 @@ public final class StringUtils {
   }
 
   public static boolean isBlank(String src) {
-    return src == null || src.isEmpty() || src.trim().isEmpty();
+    return isEmpty(src) || src.trim().isEmpty();
   }
 
   public static boolean isNotBlank(String src) {
@@ -32,7 +32,7 @@ public final class StringUtils {
   }
 
   public static boolean isEmpty(String src) {
-    return (src == null || src.isEmpty());
+    return isNull(src) || src.isEmpty();
   }
 
   public static boolean isNotEmpty(String src) {
@@ -67,8 +67,7 @@ public final class StringUtils {
   public static String giveMeOneKorean(int length) {
     return IntStream.range(0, length)
       .mapToObj(i -> String.valueOf((char) ((Math.random() * 11172) + 0xAC00)))
-      .collect(
-        Collectors.joining());
+      .collect(Collectors.joining());
   }
 
   public static String giveMeOneKoreanAsBytes(int lengthOfBytes) {
@@ -89,11 +88,11 @@ public final class StringUtils {
   }
 
   public static String giveMeOne(int origin, int bound, int... without) {
-    int givenSize;
+    int srcSize;
     do {
-      givenSize = ThreadLocalRandom.current().nextInt(origin, bound);
-    } while (isNotContains(without, givenSize));
-    return giveMeOne(givenSize);
+      srcSize = ThreadLocalRandom.current().nextInt(origin, bound);
+    } while (isNotContains(without, srcSize));
+    return giveMeOne(srcSize);
   }
 
   private static boolean isNotContains(int[] without, int match) {
@@ -112,42 +111,45 @@ public final class StringUtils {
     return buffer.toString();
   }
 
-  public static void requireNotNull(String given) {
-    if (isNull(given)) {
+  public static String requireNotNull(String src) {
+    if (isNull(src)) {
       throw new IllegalArgumentException("required not null");
     }
+    return src;
   }
 
-  public static void requireNotBlank(String given) {
-    if (isBlank(given)) {
+  public static String requireNotBlank(String src) {
+    if (isBlank(src)) {
       throw new IllegalArgumentException("required not blank");
     }
+    return src;
   }
 
-  public static void requireNotEmpty(String given) {
-    if (isEmpty(given)) {
+  public static String requireNotEmpty(String src) {
+    if (isEmpty(src)) {
       throw new IllegalArgumentException("required not empty");
     }
+    return src;
   }
 
-  public static String requireNonNull(String value, RuntimeException exception) {
-    if (value == null) {
+  public static String requireNotNull(String src, RuntimeException exception) {
+    if (src == null) {
       throw exception;
     }
-    return value;
+    return src;
   }
 
-  public static String requireNonEmpty(String value, RuntimeException exception) {
-    if (requireNonNull(value, exception).isEmpty()) {
+  public static String requireNotEmpty(String src, RuntimeException exception) {
+    if (requireNotNull(src, exception).isEmpty()) {
       throw exception;
     }
-    return value;
+    return src;
   }
 
-  public static String requireNonBlank(String value, RuntimeException exception) {
-    if (requireNonEmpty(value, exception).trim().isEmpty()) {
+  public static String requireNotBlank(String src, RuntimeException exception) {
+    if (requireNotEmpty(src, exception).trim().isEmpty()) {
       throw exception;
     }
-    return value;
+    return src;
   }
 }
