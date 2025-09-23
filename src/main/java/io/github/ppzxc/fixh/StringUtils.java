@@ -23,6 +23,10 @@ public final class StringUtils {
     return isNull(src) ? "" : src;
   }
 
+  public static String nvl(String src, String defaults) {
+    return isNull(src) ? defaults : src;
+  }
+
   public static boolean isNull(String src) {
     return src == null;
   }
