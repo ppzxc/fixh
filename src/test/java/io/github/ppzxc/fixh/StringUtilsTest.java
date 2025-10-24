@@ -9,6 +9,36 @@ import org.junit.jupiter.api.Test;
 class StringUtilsTest {
 
   @Test
+  void should_return_org_if_null() {
+    assertThat(StringUtils.isBlank(null, "DEF")).isEqualTo("DEF");
+  }
+
+  @Test
+  void should_return_org_if_empty() {
+    assertThat(StringUtils.isBlank("", "DEF")).isEqualTo("DEF");
+  }
+
+  @Test
+  void should_return_org_if_blank() {
+    assertThat(StringUtils.isBlank("   ", "DEF")).isEqualTo("DEF");
+  }
+
+  @Test
+  void should_return_org_if_null_1() {
+    assertThat(StringUtils.isNotBlank(null, "DEF")).isEqualTo("DEF");
+  }
+
+  @Test
+  void should_return_org_if_empty_1() {
+    assertThat(StringUtils.isNotBlank("", "DEF")).isEqualTo("DEF");
+  }
+
+  @Test
+  void should_return_org_if_blank_1() {
+    assertThat(StringUtils.isNotBlank("   ", "DEF")).isEqualTo("DEF");
+  }
+
+  @Test
   void should_return_true_if_null_3() {
     assertThat(StringUtils.isBlank(null)).isTrue();
   }

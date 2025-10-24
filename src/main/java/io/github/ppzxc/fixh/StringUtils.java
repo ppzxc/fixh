@@ -11,8 +11,16 @@ public final class StringUtils {
   private StringUtils() {
   }
 
+  public static String isBlank(String src, String def) {
+    return isBlank(src) ? def : src;
+  }
+
   public static boolean isBlank(String src) {
     return isEmpty(src) || src.trim().isEmpty();
+  }
+
+  public static String isNotBlank(String src, String def) {
+    return isNotBlank(src) ? src : def;
   }
 
   public static boolean isNotBlank(String src) {
