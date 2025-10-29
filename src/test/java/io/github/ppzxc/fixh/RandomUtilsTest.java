@@ -9,6 +9,11 @@ import org.junit.jupiter.api.RepeatedTest;
 class RandomUtilsTest {
 
   @RepeatedTest(10)
+  void should_return_korean_name() {
+    assertThat(RandomUtils.koreaName()).hasSize(3);
+  }
+
+  @RepeatedTest(10)
   void should_return_port() {
     assertThat(RandomUtils.port())
       .isGreaterThanOrEqualTo(1024)
