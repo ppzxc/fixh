@@ -2,7 +2,7 @@
 
 # fixh
 
-- Utility
+- utility
 
 # usage
 
