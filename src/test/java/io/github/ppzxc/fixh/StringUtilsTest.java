@@ -79,6 +79,11 @@ class StringUtilsTest {
   }
 
   @Test
+  void should_return_default_when_input_null() {
+    assertThat(StringUtils.nvl(null, "defaults")).isEqualTo("defaults");
+  }
+
+  @Test
   void should_return_true_if_null() {
     assertThat(StringUtils.isNull(null)).isTrue();
   }
@@ -89,6 +94,11 @@ class StringUtilsTest {
   }
 
   @Test
+  void should_return_defaults_when_input_null() {
+    assertThat(StringUtils.isNull(null, "defaults")).isEqualTo("defaults");
+  }
+
+  @Test
   void should_return_false_if_null() {
     assertThat(StringUtils.isNotNull(null)).isFalse();
   }
@@ -96,6 +106,11 @@ class StringUtilsTest {
   @Test
   void should_return_false_if_not_null() {
     assertThat(StringUtils.isNotNull("null")).isTrue();
+  }
+
+  @Test
+  void should_return_defaults_when_not_null() {
+    assertThat(StringUtils.isNotNull("null", "defaults")).isEqualTo("defaults");
   }
 
   @Test

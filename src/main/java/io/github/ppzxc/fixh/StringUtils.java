@@ -11,48 +11,56 @@ public final class StringUtils {
   private StringUtils() {
   }
 
-  public static String isBlank(String src, String def) {
-    return isBlank(src) ? def : src;
+  public static String isBlank(String value, String defaults) {
+    return isBlank(value) ? defaults : value;
   }
 
-  public static boolean isBlank(String src) {
-    return isEmpty(src) || src.trim().isEmpty();
+  public static boolean isBlank(String value) {
+    return isEmpty(value) || value.trim().isEmpty();
   }
 
-  public static String isNotBlank(String src, String def) {
-    return isNotBlank(src) ? src : def;
+  public static String isNotBlank(String value, String defaults) {
+    return isNotBlank(value) ? value : defaults;
   }
 
-  public static boolean isNotBlank(String src) {
-    return !isBlank(src);
+  public static boolean isNotBlank(String value) {
+    return !isBlank(value);
   }
 
-  public static String nvl(String src) {
-    return isNull(src) ? "" : src;
+  public static String nvl(String value) {
+    return isNull(value) ? "" : value;
   }
 
-  public static String nvl(String src, String defaults) {
-    return isNull(src) ? defaults : src;
+  public static String nvl(String value, String defaults) {
+    return isNull(value) ? defaults : value;
   }
 
-  public static boolean isNull(String src) {
-    return src == null;
+  public static boolean isNull(String value) {
+    return value == null;
   }
 
-  public static boolean isNotNull(String src) {
-    return !isNull(src);
+  public static String isNull(String value, String defaults) {
+    return value == null ? defaults : value;
   }
 
-  public static boolean isEmpty(String src) {
-    return isNull(src) || src.isEmpty();
+  public static boolean isNotNull(String value) {
+    return !isNull(value);
   }
 
-  public static boolean isNotEmpty(String src) {
-    return !isEmpty(src);
+  public static String isNotNull(String value, String defaults) {
+    return !isNull(value) ? defaults : value;
   }
 
-  public static String isEmptyToDefault(String src, String def) {
-    return isEmpty(src) ? def : src;
+  public static boolean isEmpty(String value) {
+    return isNull(value) || value.isEmpty();
+  }
+
+  public static boolean isNotEmpty(String value) {
+    return !isEmpty(value);
+  }
+
+  public static String isEmptyToDefault(String value, String def) {
+    return isEmpty(value) ? def : value;
   }
 
   public static String leftPad(String type, int i, String space) {
@@ -100,11 +108,11 @@ public final class StringUtils {
   }
 
   public static String giveMeOne(int origin, int bound, int... without) {
-    int srcSize;
+    int size;
     do {
-      srcSize = ThreadLocalRandom.current().nextInt(origin, bound);
-    } while (isNotContains(without, srcSize));
-    return giveMeOne(srcSize);
+      size = ThreadLocalRandom.current().nextInt(origin, bound);
+    } while (isNotContains(without, size));
+    return giveMeOne(size);
   }
 
   private static boolean isNotContains(int[] without, int match) {
@@ -123,45 +131,45 @@ public final class StringUtils {
     return buffer.toString();
   }
 
-  public static String requireNotNull(String src) {
-    if (isNull(src)) {
+  public static String requireNotNull(String value) {
+    if (isNull(value)) {
       throw new IllegalArgumentException("required not null");
     }
-    return src;
+    return value;
   }
 
-  public static String requireNotBlank(String src) {
-    if (isBlank(src)) {
+  public static String requireNotBlank(String value) {
+    if (isBlank(value)) {
       throw new IllegalArgumentException("required not blank");
     }
-    return src;
+    return value;
   }
 
-  public static String requireNotEmpty(String src) {
-    if (isEmpty(src)) {
+  public static String requireNotEmpty(String value) {
+    if (isEmpty(value)) {
       throw new IllegalArgumentException("required not empty");
     }
-    return src;
+    return value;
   }
 
-  public static String requireNotNull(String src, RuntimeException exception) {
-    if (src == null) {
+  public static String requireNotNull(String value, RuntimeException exception) {
+    if (value == null) {
       throw exception;
     }
-    return src;
+    return value;
   }
 
-  public static String requireNotEmpty(String src, RuntimeException exception) {
-    if (requireNotNull(src, exception).isEmpty()) {
+  public static String requireNotEmpty(String value, RuntimeException exception) {
+    if (requireNotNull(value, exception).isEmpty()) {
       throw exception;
     }
-    return src;
+    return value;
   }
 
-  public static String requireNotBlank(String src, RuntimeException exception) {
-    if (requireNotEmpty(src, exception).trim().isEmpty()) {
+  public static String requireNotBlank(String value, RuntimeException exception) {
+    if (requireNotEmpty(value, exception).trim().isEmpty()) {
       throw exception;
     }
-    return src;
+    return value;
   }
 }
