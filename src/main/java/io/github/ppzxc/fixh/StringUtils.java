@@ -63,20 +63,20 @@ public final class StringUtils {
     return isEmpty(value) ? def : value;
   }
 
-  public static String leftPad(String type, int i, String space) {
-    return padding(type, i, space) + type;
+  public static String leftPad(String value, int padSize, String padChar) {
+    return padding(value, padSize, padChar) + value;
   }
 
-  public static String rightPad(String type, int i, String space) {
-    return type + padding(type, i, space);
+  public static String rightPad(String value, int padSize, String padChar) {
+    return value + padding(value, padSize, padChar);
   }
 
-  private static String padding(String type, int i, String space) {
-    if (type.length() >= i) {
-      return type;
+  private static String padding(String value, int padSize, String padChar) {
+    if (value.length() >= padSize) {
+      return value;
     }
-    return IntStream.range(0, i - type.length())
-      .mapToObj(j -> space)
+    return IntStream.range(0, padSize - value.length())
+      .mapToObj(j -> padChar)
       .collect(Collectors.joining());
   }
 
