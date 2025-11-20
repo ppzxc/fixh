@@ -20,14 +20,14 @@ class ShortUtilsTest {
   void should_return_unsigned_short() {
     assertThat(ShortUtils.getUnsignedBoundary())
       .isPositive()
-      .isLessThanOrEqualTo(FixhConstants.UNSIGNED_MAX_VALUE_SHORT);
+      .isLessThanOrEqualTo(ShortUtils.getUnsignedMaxValue());
   }
 
   @RepeatedTest(10)
   void should_return_greater_than_unsigned_short_max_value() {
     assertThat(ShortUtils.getGreaterThanUnsignedIntegerMaxValue())
       .isPositive()
-      .isGreaterThan(FixhConstants.UNSIGNED_MAX_VALUE_SHORT);
+      .isGreaterThan(ShortUtils.getUnsignedMaxValue());
   }
 
   @RepeatedTest(10)

@@ -13,7 +13,7 @@ class NibbleUtilsTest {
   void should_return_negative_nibble() {
     assertThat((int) NibbleUtils.getNegative())
       .isNegative()
-      .isGreaterThanOrEqualTo(FixhConstants.SIGNED_NIBBLE_MIN_VALUE)
+      .isGreaterThanOrEqualTo(NibbleUtils.SIGNED_NIBBLE_MIN_VALUE)
       .isNotPositive();
   }
 
@@ -22,7 +22,7 @@ class NibbleUtilsTest {
     assertThat((int) NibbleUtils.getPositive())
       .isPositive()
       .isNotNegative()
-      .isLessThanOrEqualTo(FixhConstants.SIGNED_NIBBLE_MAX_VALUE);
+      .isLessThanOrEqualTo(NibbleUtils.SIGNED_NIBBLE_MAX_VALUE);
   }
 
   @RepeatedTest(10)
@@ -30,14 +30,14 @@ class NibbleUtilsTest {
     assertThat((int) NibbleUtils.getUnsignedBoundary())
       .isPositive()
       .isNotNegative()
-      .isLessThanOrEqualTo(FixhConstants.UNSIGNED_NIBBLE_MAX_VALUE);
+      .isLessThanOrEqualTo(NibbleUtils.UNSIGNED_NIBBLE_MAX_VALUE);
   }
 
   @RepeatedTest(10)
   void should_return_greater_than_unsigned_nibble_max_value() {
     assertThat((int) NibbleUtils.getGreaterThanUnsignedByteMaxValue())
       .isPositive()
-      .isGreaterThanOrEqualTo(FixhConstants.UNSIGNED_NIBBLE_MAX_VALUE);
+      .isGreaterThanOrEqualTo(NibbleUtils.UNSIGNED_NIBBLE_MAX_VALUE);
   }
 
   @RepeatedTest(100)

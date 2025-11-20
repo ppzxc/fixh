@@ -53,7 +53,7 @@ class ByteUtilsTest {
 
   @RepeatedTest(10)
   void should_greater_byte_max_value() {
-    assertThat(ByteUtils.getGreaterThanUnsignedByteMaxValue()).isGreaterThan(FixhConstants.UNSIGNED_MAX_VALUE_BYTE);
+    assertThat(ByteUtils.getGreaterThanUnsignedByteMaxValue()).isGreaterThan(ByteUtils.getUnsignedMaxValue());
   }
 
   @RepeatedTest(10)

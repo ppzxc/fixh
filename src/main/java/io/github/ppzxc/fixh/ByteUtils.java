@@ -33,11 +33,15 @@ public final class ByteUtils {
   }
 
   public static short getUnsignedBoundary() {
-    return (short) ThreadLocalRandom.current().nextInt(1, FixhConstants.UNSIGNED_MAX_VALUE_BYTE);
+    return (short) ThreadLocalRandom.current().nextInt(1, getUnsignedMaxValue());
+  }
+
+  public static short getUnsignedMaxValue() {
+    return (Byte.MAX_VALUE * 2) + 1;
   }
 
   public static short getGreaterThanUnsignedByteMaxValue() {
-    return (short) ThreadLocalRandom.current().nextInt(FixhConstants.UNSIGNED_MAX_VALUE_BYTE + 1, Short.MAX_VALUE);
+    return (short) ThreadLocalRandom.current().nextInt(getUnsignedMaxValue() + 1, Short.MAX_VALUE);
   }
 
   public static byte giveMeOneWithout(byte origin, byte bound, byte without) {

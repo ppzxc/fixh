@@ -16,11 +16,15 @@ public final class ShortUtils {
   }
 
   public static int getUnsignedBoundary() {
-    return ThreadLocalRandom.current().nextInt(0, FixhConstants.UNSIGNED_MAX_VALUE_SHORT);
+    return ThreadLocalRandom.current().nextInt(0, getUnsignedMaxValue());
+  }
+
+  public static int getUnsignedMaxValue() {
+    return (Short.MAX_VALUE * 2) + 1;
   }
 
   public static int getGreaterThanUnsignedIntegerMaxValue() {
-    return ThreadLocalRandom.current().nextInt(FixhConstants.UNSIGNED_MAX_VALUE_SHORT + 1, Integer.MAX_VALUE);
+    return ThreadLocalRandom.current().nextInt(getUnsignedMaxValue() + 1, Integer.MAX_VALUE);
   }
 
   public static short giveMeOne() {

@@ -52,10 +52,15 @@ public final class IntUtils {
   }
 
   public static long giveMeUnsignedBoundary() {
-    return ThreadLocalRandom.current().nextLong(0, FixhConstants.UNSIGNED_MAX_VALUE_INT);
+    return ThreadLocalRandom.current().nextLong(0, getUnsignedIntegerMaxValue());
+  }
+
+  public static long getUnsignedIntegerMaxValue() {
+    long maxValue = Integer.MAX_VALUE;
+    return (maxValue * 2) + 1;
   }
 
   public static long giveMeGreaterThanUnsignedIntegerMaxValue() {
-    return ThreadLocalRandom.current().nextLong(FixhConstants.UNSIGNED_MAX_VALUE_INT + 1, Long.MAX_VALUE);
+    return ThreadLocalRandom.current().nextLong(getUnsignedIntegerMaxValue() + 1, Long.MAX_VALUE);
   }
 }

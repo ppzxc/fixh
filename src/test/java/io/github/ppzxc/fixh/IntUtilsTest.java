@@ -71,13 +71,13 @@ class IntUtilsTest {
   @RepeatedTest(10)
   void should_return_unsigned() {
     assertThat(IntUtils.giveMeUnsignedBoundary()).isNotNegative()
-      .isLessThanOrEqualTo(FixhConstants.UNSIGNED_MAX_VALUE_INT);
+      .isLessThanOrEqualTo(IntUtils.getUnsignedIntegerMaxValue());
   }
 
   @RepeatedTest(10)
   void should_return_unsigned_when_over_int_max_value() {
     assertThat(IntUtils.giveMeGreaterThanUnsignedIntegerMaxValue())
-      .isGreaterThanOrEqualTo(FixhConstants.UNSIGNED_MAX_VALUE_INT + 1)
+      .isGreaterThanOrEqualTo(IntUtils.getUnsignedIntegerMaxValue() + 1)
       .isLessThanOrEqualTo(Long.MAX_VALUE);
   }
 }
