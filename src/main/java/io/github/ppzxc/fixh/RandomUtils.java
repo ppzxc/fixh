@@ -16,7 +16,7 @@ public final class RandomUtils {
   private static final List<String> UPPER_CHAR;
   private static final List<String> DIGIT_CHAR;
   private static final List<String> SPECIAL_CHAR;
-  private static List<String> KOREA_LAST_NAME;
+  private static final List<String> KOREA_LAST_NAME;
 
   private RandomUtils() {
   }

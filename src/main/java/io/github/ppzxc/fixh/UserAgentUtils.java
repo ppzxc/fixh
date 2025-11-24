@@ -13,7 +13,7 @@ public final class UserAgentUtils {
   private UserAgentUtils() {
     this.browserNames = new String[]{"Internet Explorer", "fireFox", "chrome", "safari", "opera"};
     this.browsers = new HashMap<>();
-    browsers.put("Internet Explorer", new String[]{
+    this.browsers.put("Internet Explorer", new String[]{
       "Mozilla/5.0 (compatible; MSIE 10.6; Windows NT 6.1; Trident/5.0; InfoPath.2; SLCC1; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET CLR 2.0.50727) 3gpp-gba UNTRUSTED/1.0",
       "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)",
       "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)",
@@ -257,7 +257,7 @@ public final class UserAgentUtils {
       "Mozilla/1.22 (compatible; MSIE 2.0; Windows 3.1)"
     });
 
-    browsers.put("fireFox", new String[]{
+    this.browsers.put("fireFox", new String[]{
       "Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0",
       "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20120101 Firefox/29.0",
       "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/29.0",
@@ -684,7 +684,7 @@ public final class UserAgentUtils {
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.1.13) Gecko/20080313 Firefox",
     });
 
-    browsers.put("chrome", new String[]{
+    this.browsers.put("chrome", new String[]{
       "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
       "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
@@ -1252,7 +1252,7 @@ public final class UserAgentUtils {
       "Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/532.0 (KHTML, like Gecko) Chrome/4.0.211.2 Safari/532.0",
     });
 
-    browsers.put("safari", new String[]{
+    this.browsers.put("safari", new String[]{
       "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; it-it) AppleWebKit/419 (KHTML, like Gecko) Safari/419.3",
       "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; it-it) AppleWebKit/418.9 (KHTML, like Gecko) Safari/419.3",
       "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; fr) AppleWebKit/418.9.1 (KHTML, like Gecko) Safari/419.3",
@@ -1468,7 +1468,7 @@ public final class UserAgentUtils {
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_5; it-it) AppleWebKit/525.18 (KHTML, like Gecko)",
     });
 
-    browsers.put("opera", new String[]{
+    this.browsers.put("opera", new String[]{
       "Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14",
       "Mozilla/5.0 (Windows NT 6.0; rv:2.0) Gecko/20100101 Firefox/4.0 Opera 12.14",
       "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0) Opera 12.14",
